@@ -10,7 +10,7 @@ DoitPHP(原Tommyframework)是一个基于BSD开源协议发布的轻量级PHP框
 
 四、集成了JQUERY及JQUERY FORM、LAZYLOAD等JQUERY插件，使前端页面开发中实现AJAX LOADING图片加载效果、CHECKBOX的全选或反选效果以及图片的惰性加载效果等，让其变得得心应手。
 
-五、提供了PHP程序开发中常用的操作类库，无论是COOKIE、SESSION的操作，还是实现网页页面的分页效果，生成RAR、EXCEL、PDF等文件类型的文件，实现MEMCACH、XCACHE、APC等常见的缓存操作，实现WEB SERVICE等PHP的高级应用。利用扩展类库进行操作，如同“信手拈来”。
+五、提供了PHP程序开发中常用的操作类库，无论是COOKIE、SESSION的操作，还是实现网页页面的分页效果，生成RAR、EXCEL、PDF等文件类型的文件，实现MEMCACH、XCACHE、APC等常见的缓存操作。利用扩展类库进行操作，如同“信手拈来”。
 
 六、丰富的数据库驱动，支持MYSQL、POSTGRESQL、ORACLE、SQLITE、MSSQL、MONGODB、REDIS等数据库。
 
