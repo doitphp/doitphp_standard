@@ -2,7 +2,7 @@
 /**
  * 获取网址的路由信息类
  *
- * 分析访问网址，从网址中获取模块名、控制器、Action名
+ * 分析访问网址，从网址中获取控制器、Action名
  *
  * @author tommy <tommy@doitphp.com>
  * @link http://www.doitphp.com
