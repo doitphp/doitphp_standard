@@ -433,6 +433,8 @@ abstract class Controller {
     /**
      * 静态加载文件
      *
+     * 相当于inclue_once()
+     *
      * @example
      * 例一：
      * $this->import('snoopy.php');
