@@ -154,31 +154,25 @@ abstract class Doit {
             $controller = self::$_controller . 'Controller';
             $action     = self::$_action . 'Action';
 
-            $controllerHomePath = BASE_PATH . '/controllers';
             //分析Controller子目录的情况。注:controller文件的命名中下划线'_'相当于目录的'/'。
-            if (strpos($controller, '_') === false) {
-                $controllerFilePath = $controllerHomePath . DS . self::$_controller . '.php';
-                if (!is_file($controllerFilePath)) {
-                    //当controller名称中不含有'_'字符时
-                    self::_show404Error();
-                }
-                //当文件在controller根目录下存在时,直接加载。
-                self::loadFile($controllerFilePath);
+            if (strpos($controller, '_') !== false) {
+                //当controller名中含有'_'字符时,将'_'替换为路径分割符。如："/" 或 "\"
+                $childDirArray = explode('_', strtolower(self::$_controller));
+                $tagFileName   = ucfirst(array_pop($childDirArray));
+                $childDirName  = implode(DS, $childDirArray);
+                $tagFileName   = $childDirName . DS . $tagFileName;
             } else {
-                //当$controller中含有'_'字符时,将'_'替换为路径分割符。如："/" 或 "\"
-                $childDirArray      = explode('_', strtolower(self::$_controller));
-                $controllerFileName = ucfirst(array_pop($childDirArray));
-                $childDirName       = implode(DS, $childDirArray);
-                unset($childDirArray);
-                //重新组装Controller文件的路径
-                $controllerFilePath = $controllerHomePath . DS . $childDirName . DS . $controllerFileName . '.php';
-                if (!is_file($controllerFilePath)) {
-                    //当文件在子目录里没有找到时
-                    self::_show404Error();
-                }
-                //当子目录中所要加载的文件存在时
-                self::loadFile($controllerFilePath);
+                $tagFileName   = self::$_controller;
             }
+
+            //分析controller文件的路径
+            $controllerFilePath = BASE_PATH . '/controllers/' . $tagFileName . '.php';
+            if (!is_file($controllerFilePath)) {
+                //当controller名称中不含有'_'字符时
+                self::_show404Error();
+            }
+            //当文件在controller根目录下存在时,直接加载。
+            self::loadFile($controllerFilePath);
 
             //创建一个页面控制器对象(Controller Object)
             $appObject = new $controller();
@@ -341,7 +335,7 @@ abstract class Doit {
             //分析文件是不是真实存在,若文件不存在,则只能...
             if (!is_file($filePath)) {
                 //当所要加载的文件不存在时,错误提示
-                Controller::halt('The file: ' . $filePath . ' is not found!', 'Normal');
+                Controller::halt('The File: ' . $filePath . ' is not found!', 'Normal');
             }
 
             include_once $filePath;
