@@ -84,31 +84,26 @@ abstract class AutoLoad {
      */
     public static function register($className) {
 
-        //参数分析
-        if (!$className) {
-            return false;
-        }
-
         //doitPHP核心类文件的加载分析
         if (isset(self::$_coreClassArray[$className])) {
             //当$className在核心类引导数组中存在时, 加载核心类文件
             Doit::loadFile(DOIT_ROOT . DS . self::$_coreClassArray[$className]);
         } elseif (substr($className, -10) == 'Controller') {
             //controller文件自动载分析
-            self::_loadController($className);
+            self::_loadTagFile($className, 'Controller');
         } elseif (substr($className, -5) == 'Model') {
             //modlel文件自动加载分析
-            self::_loadModel($className);
+            self::_loadTagFile($className, 'Model');
         } elseif (substr($className, -6) == 'Widget') {
             //加载所要运行的widget文件
-            self::_loadWidget($className);
+            self::_loadTagFile($className, 'Widget');
         } else {
             //分析加载扩展类文件目录(library)的文件
-            if (!self::_loadLibrary($className)) {
+            if (!self::_loadTagFile($className, 'Library')) {
                 //根据配置文件improt的引导设置，自动加载文件
                 if (!self::_loadImportConfigFile($className)) {
                     //最后，当运行上述自动加载规则，均没有加载所需要的文件时，提示错误信息
-                    Controller::halt('The Class ' . $className .' File is not found !', 'Normal');
+                    Controller::halt('The File: ' . $className .' is not found !', 'Normal');
                 }
             }
         }
@@ -117,128 +112,63 @@ abstract class AutoLoad {
     }
 
     /**
-     * 自动加载控制器文件
+     * 自动加载标签文件
      *
      * @access private
      *
      * @param string $className 所需要加载的类的名称,注:不含后缀名
+     * @param string $tagName 类文件的行为标签。如Controller, Widget, Model
      *
      * @return void
      */
-    private static function _loadController($className) {
+    private static function _loadTagFile($className, $tagName) {
 
-        //获取Controller文件目录路径
-        $controllerHomePath = BASE_PATH . '/controllers';
+        //分析标签文件目录路径
+        switch ($tagName) {
 
-        //分析controller名称
-        $controllerName = substr($className, 0, -10);
+            case 'Controller':
+                $dirName   = 'controllers';
+                $className = substr($className, 0, -10);
+                //当controller文件存放于子目录时
+                if (strpos($className, '_') !== false) {
+                    $childDirArray = explode('_', strtolower($className));
+                    $tagFileName   = ucfirst(array_pop($childDirArray));
+                    $className     = implode(DS, $childDirArray) . DS . $tagFileName;
+                }
+                break;
 
-        //分析Controller子目录的情况。注:controller文件的命名中下划线'_'相当于目录的'/'。
-        if (strpos($controllerName, '_') === false) {
-            $controllerFilePath = $controllerHomePath . DS . $controllerName . '.php';
-            if (!is_file($controllerFilePath)) {
-                //当Controller文件不存在时,系统直接报错
-                Controller::halt('The Controller File: ' . $controllerFilePath .' is not found!', 'Normal');
+            case 'Model':
+                $dirName   = 'models';
+                $className = substr($className, 0, -5);
+                break;
+
+            case 'Widget':
+                $dirName   = 'widgets';
+                $className = substr($className, 0, -6);
+                break;
+
+            case 'Library':
+                $dirName   = 'library';
+                break;
+
+            default:
+                $dirName = 'library';
+        }
+
+        //分析标签文件的实际路径
+        $tagFilePath = BASE_PATH . DS . $dirName . DS . str_replace('_', DS, $className) . '.php';
+
+        //当标签文件存在时
+        if (!is_file($tagFilePath)) {
+            if ($tagName == 'Library') {
+                return false;
             }
-            //当文件在Controller根目录下存在时,直接加载
-            Doit::loadFile($controllerFilePath);
-        } else {
-            //当$controller中含有'_'字符时,将'_'替换为路径分割符。如："/" 或 "\"
-            $childDirArray      = explode('_', strtolower($controllerName));
-            $controllerFileName = ucfirst(array_pop($childDirArray));
-            $childDirName       = implode(DS, $childDirArray);
-            unset($childDirArray);
-            //分析并获取Controller中子目录中的Controller文件径
-            $controllerFilePath = $controllerHomePath . DS . $childDirName . DS . $controllerFileName . '.php';
-            if (!is_file($controllerFilePath)) {
-                //当文件在子目录里没有找到时
-                Controller::halt('The Controller File: ' . $controllerFilePath .' is not found!', 'Normal');
-            }
-            //当子目录中所要加载的文件存在时
-            Doit::loadFile($controllerFilePath);
-        }
-    }
-
-    /**
-     * 自动加载模型文件
-     *
-     * @access private
-     *
-     * @param string $className 所需要加载的类的名称,注:不含后缀名
-     *
-     * @return void
-     */
-    private static function _loadModel($className) {
-
-        //获取Model文件目录路径
-        $modelHomePath = BASE_PATH . '/models';
-
-        //分析Model文件的实际路径
-        $modelFilePath = self::_parseFilePath($modelHomePath, substr($className, 0, -5));
-
-        //当Model文件存在时
-        if (!is_file($modelFilePath)) {
-            //当所要加载的Model文件不存在时,显示错误提示信息
-            Controller::halt('The Model file: ' . $modelFilePath . ' is not found!', 'Normal');
+            //当所要加载的标签文件不存在时,显示错误提示信息
+            Controller::halt('The File: ' . $tagFilePath . ' is not found!', 'Normal');
         }
 
-        //加载Model文件
-        Doit::loadFile($modelFilePath);
-        return true;
-    }
-
-    /**
-     * 自动加载挂件文件
-     *
-     * @access private
-     *
-     * @param string $className 所需要加载的类的名称,注:不含后缀名
-     *
-     * @return void
-     */
-    private static function _loadWidget($className) {
-
-        //获取Widget文件目录路径
-        $widgetHomePath = BASE_PATH . '/widgets';
-
-        //分析Widget文件的实际路径
-        $widgetFilePath = self::_parseFilePath($widgetHomePath, substr($className, 0, -6));
-        //当Widget文件在Widget根目录中存在时
-        if (!is_file($widgetFilePath)) {
-            //当所要加载的Widget文件不存在时,显示错误提示信息
-            Controller::halt('The Widget file: ' . $widgetFilePath . ' is not found!', 'Normal');
-        }
-
-        //加载Widget文件
-        Doit::loadFile($widgetFilePath);
-        return true;
-    }
-
-    /**
-     * 自动加载自定义类文件
-     *
-     * @access private
-     *
-     * @param string $className 所需要加载的类的名称,注:不含后缀名
-     *
-     * @return void
-     */
-    private static function _loadLibrary($className) {
-
-        //获取library文件目录路径
-        $libraryHomePath = BASE_PATH . '/library';
-
-        //分析library文件的实际路径
-        $libraryFilePath = self::_parseFilePath($libraryHomePath, $className);
-
-        //当library文件在library根目录中存在时
-        if (!is_file($libraryFilePath)) {
-            //当所要加载的library文件不存在时
-            return false;
-        }
-
-        //加载library类文件
-        Doit::loadFile($libraryFilePath);
+        //加载标签文件
+        Doit::loadFile($tagFilePath);
         return true;
     }
 
@@ -270,7 +200,7 @@ abstract class AutoLoad {
                 if (strpos($rules, '*') !== false) {
                     $filePath = str_replace('*', $className, $rules);
                 } else {
-                    $filePath = self::_parseFilePath($rules, $className);
+                    $filePath = $rules . DS . str_replace('_', DS, $className) . '.php';
                 }
 
                 //当自定义自动加载的文件存在时
@@ -285,27 +215,4 @@ abstract class AutoLoad {
 
         return $atuoLoadStatus;
     }
-
-    /**
-     * 分析文件的实际路径
-     *
-     * @access private
-     *
-     * @param string $homePath 文件的home目录(如：controller文件的home为application/controllers)
-     * @param string $className 所需要加载的类的名称,注:不含后缀名
-     *
-     * @return string
-     */
-    protected static function _parseFilePath($homePath, $className) {
-
-        //当className中含有下划线('_')时
-        if (strpos($className, '_') !== false) {
-            $childDirArray = explode('_', $className);
-            $classFileName = array_pop($childDirArray);
-            return $homePath . DS . implode(DS, $childDirArray) . DS . $classFileName . '.php';
-        }
-
-        return $homePath . DS . $className . '.php';
-    }
-
 }
