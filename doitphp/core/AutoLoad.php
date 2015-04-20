@@ -132,8 +132,8 @@ abstract class AutoLoad {
                 //当controller文件存放于子目录时
                 if (strpos($className, '_') !== false) {
                     $childDirArray = explode('_', strtolower($className));
-                    $tagFileName   = ucfirst(array_pop($childDirArray));
-                    $className     = implode(DS, $childDirArray) . DS . $tagFileName;
+                    $className     = ucfirst(array_pop($childDirArray));
+                    $className     = implode(DS, $childDirArray) . DS . $className;
                 }
                 break;
 
