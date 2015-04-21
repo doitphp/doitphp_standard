@@ -143,7 +143,7 @@ abstract class Doit {
         //定义变量_app
         static $_app = array();
 
-        self::$_controller = ucfirst(trim($routerInfo['controller'], '_'));
+        self::$_controller = ucfirst($routerInfo['controller']);
         self::$_action     = strtolower($routerInfo['action']);
 
         $appId = self::$_controller . '-' . self::$_action;
