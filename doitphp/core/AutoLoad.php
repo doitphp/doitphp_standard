@@ -142,7 +142,6 @@ abstract class AutoLoad {
 
             case 'Controller':
                 $dirName   = 'controllers';
-                $className = substr($className, 0, -10);
                 //当controller文件存放于子目录时
                 if (strpos($className, '_') !== false) {
                     $childDirArray = explode('_', strtolower($className));
@@ -153,12 +152,10 @@ abstract class AutoLoad {
 
             case 'Model':
                 $dirName   = 'models';
-                $className = substr($className, 0, -5);
                 break;
 
             case 'Widget':
                 $dirName   = 'widgets';
-                $className = substr($className, 0, -6);
                 break;
 
             case 'Library':
