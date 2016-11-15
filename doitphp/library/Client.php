@@ -41,12 +41,12 @@ class Client {
     }
 
     /**
-     * 获取客户端浏览器信息.
+     * 获取客户端信息.
      *
      * @access public
      * @return string
      */
-    public static function getBrowserAgent() {
+    public static function getUserAgent() {
 
         return isset($_SERVER['HTTP_USER_AGENT']) ? htmlspecialchars($_SERVER['HTTP_USER_AGENT']) : null;
     }
@@ -62,6 +62,8 @@ class Client {
         $userAgentInfo = htmlspecialchars($_SERVER['HTTP_USER_AGENT']);
 
         $browserArray = array(
+        'Edge' => 'Edge',
+        'rv:11.0' => 'IE11',
         'MSIE 11.0' => 'IE11',
         'MSIE 10.0' => 'IE10',
         'MSIE 9.0'  => 'IE9',
@@ -106,6 +108,7 @@ class Client {
         $userAgentInfo = htmlspecialchars($_SERVER['HTTP_USER_AGENT']);
 
         $OsArray = array(
+        'Windows NT 10.0'  => 'Windows 10',
         'Windows NT 6.3'  => 'Windows 8.1',
         'Windows NT 6.2'  => 'Windows 8',
         'Windows NT 6.1'  => 'Windows 7',
