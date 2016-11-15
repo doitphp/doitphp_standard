@@ -186,13 +186,10 @@ abstract class Response {
      * 若调试模式关闭时(即:DOIT_DEBUG为false时)，则将错误信息并写入日志
      *
      * @access public
-     *
      * @param string $message 所要显示的错误信息
-     * @param string $level 日志类型. 默认为Error. 参数：Warning, Error, Notice
-     *
      * @return string
      */
-    public static function halt($message, $level = 'Normal') {
+    public static function halt($message) {
 
         //参数分析
         if (!$message) {
@@ -209,7 +206,7 @@ abstract class Response {
         $traceString  = '';
         $sourceFile   = $traces[0]['file'] . '(' . $traces[0]['line'] . ')';
 
-        if (defined('DOIT_DEBUG') && DOIT_DEBUG === true && $level != 'Normal') {
+        if (defined('DOIT_DEBUG') && DOIT_DEBUG === true) {
             foreach ($traces as $key=>$trace) {
                 //代码跟踪级别限制
                 if ($key > 2) {
@@ -223,9 +220,9 @@ abstract class Response {
         //加载,分析,并输出excepiton文件内容
         include_once DOIT_ROOT . '/views/errors/exception.php';
 
-        if (defined('DOIT_DEBUG') && DOIT_DEBUG === false && $level != 'Normal') {
+        if (defined('DOIT_DEBUG') && DOIT_DEBUG === false) {
             //写入程序运行日志
-            Log::write($message, $level);
+            Log::write($message);
         }
 
         //终止程序
