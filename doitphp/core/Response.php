@@ -209,7 +209,7 @@ abstract class Response {
         if (defined('DOIT_DEBUG') && DOIT_DEBUG === true) {
             foreach ($traces as $key=>$trace) {
                 //代码跟踪级别限制
-                if ($key > 2) {
+                if ($key > 1) {
                     break;
                 }
                 $argsString   = ($trace['args'] && is_array($trace['args'])) ? '(' . implode('.', $trace['args']) . ')': '';
