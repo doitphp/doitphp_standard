@@ -166,6 +166,20 @@ abstract class Controller {
     }
 
     /**
+     * 删除某cookie变量的值
+     *
+     * @access public
+     *
+     * @param string $cookieName cookie变量名
+     *
+     * @return boolean
+     */
+    public function deleteCookie($cookieName) {
+
+        return $this->instance('Cookie')->delete($cookieName, $default);
+    }
+
+    /**
      * 显示提示信息操作
      *
      * 本方法支持URL的自动跳转，当显示时间有效期失效时则跳转到自定义网址，若跳转网址为空则函数不执行跳转功能，当自定义网址参数为-1时默认为:返回上一页。
