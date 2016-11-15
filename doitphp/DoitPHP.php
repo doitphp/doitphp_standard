@@ -274,6 +274,11 @@ abstract class Doit {
      */
     private static function _show404Error() {
 
+        //当为Ajax调用时
+        if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']==='XMLHttpRequest')) {
+            Response::ajax(false, 'Error 404 : Not Found');
+        }
+
         $viewFilePath = BASE_PATH . '/views/errors/error404.html';
         //判断自定义404页面文件是否存在,若不存在则加载默认404页面
         is_file($viewFilePath) ? self::loadFile($viewFilePath) : self::loadFile(DOIT_ROOT . '/views/errors/error404.html');
