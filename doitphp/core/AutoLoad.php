@@ -37,7 +37,6 @@ abstract class AutoLoad {
     'WidgetTemplate'    => 'core/WidgetTemplate.php',
     'Extension'         => 'core/Extension.php',
     'Pagination'        => 'library/Pagination.php',
-    'Script'            => 'library/Script.php',
     'File'              => 'library/File.php',
     'Html'              => 'library/Html.php',
     'Cookie'            => 'library/Cookie.php',
