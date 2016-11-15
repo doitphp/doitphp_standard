@@ -189,7 +189,7 @@ abstract class Request {
      *
      * @return string    网址(域名)
      */
-    public static function serverName() {
+    public static function getServerName() {
 
         //获取网址域名部分.
         $serverName = (!$_SERVER['HTTP_HOST']) ? $_SERVER['SERVER_NAME'] : strtolower($_SERVER['HTTP_HOST']);
@@ -219,7 +219,7 @@ abstract class Request {
      *
      * @return string
      */
-    public static function clientIp($default = '0.0.0.0') {
+    public static function getClientIp($default = '0.0.0.0') {
 
         $keys = array('HTTP_X_FORWARDED_FOR', 'HTTP_CLIENT_IP', 'REMOTE_ADDR');
         foreach ($keys as $key) {

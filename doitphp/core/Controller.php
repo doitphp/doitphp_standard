@@ -349,7 +349,7 @@ abstract class Controller {
      */
     public static function getServerName() {
 
-        return Request::serverName();
+        return Request::getServerName();
     }
 
     /**
@@ -360,7 +360,7 @@ abstract class Controller {
      */
     public static function getClientIp() {
 
-        return Request::clientIp();
+        return Request::getClientIp();
     }
 
     /**
