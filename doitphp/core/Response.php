@@ -114,6 +114,11 @@ abstract class Response {
             return false;
         }
 
+        //当为Ajax调用时
+        if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']==='XMLHttpRequest')) {
+            return self::ajax(false, $message);
+        }
+
         //当自定义跳转网址存在时
         if ($gotoUrl) {
             $limitTime    = 1000 * $limitTime;
@@ -192,6 +197,11 @@ abstract class Response {
         //参数分析
         if (!$message) {
             return false;
+        }
+
+        //当为Ajax调用时
+        if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']==='XMLHttpRequest')) {
+            return self::ajax(false, $message);
         }
 
         //调试模式下优雅输出错误信息
