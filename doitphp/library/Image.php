@@ -413,7 +413,7 @@ class Image {
 
         if (!$this->_fontX || !$this->_fontY) {
             if (!$this->_textContent) {
-                Controller::halt('You do not set the watermark text on image!');
+                Response::halt('You do not set the watermark text on image!');
             }
 
             $bbox = imagettfbbox($this->_fontSize, 0, $this->_fontName, $this->_textContent);
@@ -462,7 +462,7 @@ class Image {
 
         //当没有所生成的图片的宽度和高度设置时.
         if (!$this->_width || !$this->_height) {
-            Controller::halt('You do not set the image height size or width size!');
+            Response::halt('You do not set the image height size or width size!');
         }
 
         $perW = $this->_width/$this->_imageWidth;

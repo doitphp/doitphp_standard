@@ -57,7 +57,7 @@ class Cache_Redis {
     public function __construct($options = null) {
 
         if (!extension_loaded('redis')) {
-            Controller::halt('The redis extension to be loaded!');
+            Response::halt('The redis extension to be loaded!');
         }
 
         //当参数为空时,程序则自动加载配置文件中数据库连接参数

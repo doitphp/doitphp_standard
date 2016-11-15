@@ -64,7 +64,7 @@ class MongoDb {
     public function __construct($params = array()) {
 
         if (!extension_loaded('mongo')) {
-            Controller::halt('The mongo extension to be loaded!');
+            Response::halt('The mongo extension to be loaded!');
         }
 
         //参数分析
@@ -75,7 +75,7 @@ class MongoDb {
 
         $params = is_array($params) ? $params + $this->_defaultConfig : $this->_defaultConfig;
         if (!isset($params['dbname']) || !$params['dbname']) {
-            Controller::halt('The file of MongoDB config is error, dbname is not found!');
+            Response::halt('The file of MongoDB config is error, dbname is not found!');
         }
 
         try {

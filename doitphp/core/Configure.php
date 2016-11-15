@@ -80,7 +80,7 @@ abstract class Configure {
         if ($filePath) {
             //分析配置文件是否存在
             if (!is_file($filePath)) {
-                Controller::halt('The configuration file: ' . $filePath . ' is not found!', 'Normal');
+                Response::halt('The configuration file: ' . $filePath . ' is not found!');
             }
             //获取应用配置文件内容
             include_once $filePath;
@@ -168,7 +168,7 @@ abstract class Configure {
             $filePath = BASE_PATH . '/config/' . $fileName . '.php';
             //判断文件是否存在
             if (!is_file($filePath)) {
-                Controller::halt('The configuration file: ' . $fileName . '.php is not exists!', 'Normal');
+                Response::halt('The configuration file: ' . $fileName . '.php is not exists!');
             }
 
             $config = array();

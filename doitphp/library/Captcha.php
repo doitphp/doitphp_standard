@@ -450,7 +450,7 @@ class Captcha {
 
         //当有headers内容输出时.
         if (headers_sent()) {
-            Controller::halt('headers already sent');
+            Response::halt('headers already sent');
         }
 
         //显示图片,根据背景图片的格式显示相应格式的图片.

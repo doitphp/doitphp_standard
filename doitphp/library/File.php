@@ -228,7 +228,7 @@ class File {
             self::makeDir($dirName, 0755);
         } else {
             if (!is_dir($dirName)) {
-                Controller::halt('The dir: ' . $dirName . ' is not found!');
+                Response::halt('The dir: ' . $dirName . ' is not found!');
             }
         }
 
@@ -277,7 +277,7 @@ class File {
 
         //文件及目录分析
         if (!is_file($sourceFile)) {
-            Controller::halt('The file: ' . $sourceFile . ' is not found!');
+            Response::halt('The file: ' . $sourceFile . ' is not found!');
         }
         self::_parseDir(dirname($destFile), true);
 
@@ -303,7 +303,7 @@ class File {
 
         //文件及目录分析
         if (!is_file($sourceFile)) {
-            Controller::halt('The file:' . $sourceFile . ' is not found!');
+            Response::halt('The file:' . $sourceFile . ' is not found!');
         }
         self::_parseDir(dirname($destFile), true);
 

@@ -219,7 +219,7 @@ class Zip {
             return false;
         }
         if (!is_file($name)) {
-            Controller::halt("The File: {$name} is not found!");
+            Response::halt("The File: {$name} is not found!");
         }
 
         // File information

@@ -1390,7 +1390,7 @@ class Model {
         $params = $this->setConfig();
 
         if (!$params || !is_array($params)) {
-            Controller::halt('The config data of database connect is not correct!', 'Normal');
+            Response::halt('The config data of database connect is not correct!');
         }
 
         //获取数据表前缀，默认为空
@@ -1608,7 +1608,7 @@ class Model {
             return call_user_func_array(array($this, 'getAll'), $args);
         }
 
-        return Controller::halt("The method: {$method}() is not found in Model class!", 'Normal');
+        return Response::halt("The method: {$method}() is not found in Model class!");
     }
 
     /**

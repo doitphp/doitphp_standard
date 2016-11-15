@@ -21,7 +21,7 @@ p {font-family:"Verdana";font-size:9pt;}
 <p class="message">
 <?php echo $message; ?>
 </p>
-<?php if (defined('DOIT_DEBUG') && DOIT_DEBUG === true && $level != 'Normal') { ?>
+<?php if (defined('DOIT_DEBUG') && DOIT_DEBUG === true) { ?>
 <h3>Source File</h3>
 <p>
 <?php echo $sourceFile; ?>

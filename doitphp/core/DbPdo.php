@@ -74,7 +74,7 @@ class DbPdo {
 
         //参数分析
         if (!$params['dsn']) {
-            Controller::halt('database config params error!', 'Normal');
+            Response::halt('database config params error!');
         }
 
         $params += $this->_defaultConfig;

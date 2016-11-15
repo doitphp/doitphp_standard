@@ -94,7 +94,7 @@ class Language {
         if (!isset($_langArray[$langName])) {
             //分析语言文件是否存在
             if (!is_file($langFilePath)) {
-                Controller::halt("The Langueage File: {$langFilePath} is not found!", 'Normal');
+                Response::halt("The Langueage File: {$langFilePath} is not found!");
             }
 
             //获取语言包内容

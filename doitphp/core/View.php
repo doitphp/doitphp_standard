@@ -276,7 +276,7 @@ class View {
 
         //分析视图文件是否存在
         if (!is_file($viewPath)) {
-            Controller::halt("The view File: {$viewPath} is not found!", 'Normal');
+            Response::halt("The view File: {$viewPath} is not found!");
         }
 
         return $viewPath;

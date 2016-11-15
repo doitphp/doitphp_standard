@@ -184,23 +184,6 @@ abstract class Controller {
     }
 
     /**
-     * 用于显示错误信息
-     *
-     * 若调试模式关闭时(即:DOIT_DEBUG为false时)，则将错误信息并写入日志
-     *
-     * @access public
-     *
-     * @param string $message 所要显示的错误信息
-     * @param string $level 日志类型. 默认为Error. 参数：Warning, Error, Notice
-     *
-     * @return string
-     */
-    public static function halt($message, $level = 'Normal') {
-
-        return Response::halt($message, $level);
-    }
-
-    /**
      * 优雅输出print_r()函数所要输出的内容
      *
      * 用于程序调试时,完美输出调试数据,功能相当于print_r().当第二参数为true时(默认为:false),功能相当于var_dump()。注:本方法一般用于程序调试
@@ -729,7 +712,7 @@ abstract class Controller {
                 return $this->instance('Session');
 
             default:
-                $this->halt('Undefined property: ' . get_class($this) . '::' . $name);
+                Response::halt('Undefined property: ' . get_class($this) . '::' . $name);
         }
     }
 
@@ -771,7 +754,7 @@ abstract class Controller {
                 return call_user_func_array(array('Request', 'files'), $args);
 
             default:
-                $this->halt('The method: ' . $method . '() is not found in ' . get_class($this) . ' class!', 'Normal');
+                Response::halt('The method: ' . $method . '() is not found in ' . get_class($this) . ' class!');
         }
     }
 }

@@ -88,7 +88,7 @@ class DbCommand {
             return call_user_func_array(array($this, '_selectByFunction'), $args);
         }
 
-        return Controller::halt("The method: {$method}() is not found in DbCommand class!", 'Normal');
+        return Response::halt("The method: {$method}() is not found in DbCommand class!");
     }
 
     /**

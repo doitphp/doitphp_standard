@@ -238,7 +238,7 @@ abstract class Widget extends Controller {
 
         //检查视图文件路径是否正确
         if (!is_file($viewPath)) {
-            $this->halt("The widget view file: {$viewPath} is not found!", 'Normal');
+            Response::halt("The widget view file: {$viewPath} is not found!");
         }
 
         return $viewPath;

@@ -370,7 +370,7 @@ class Template {
 
         //分析视图文件是否存在
         if (!is_file($viewFile)) {
-            Controller::halt("The view file: {$viewFile} is not found!", 'Normal');
+            Response::halt("The view file: {$viewFile} is not found!");
         }
 
         $viewContent = file_get_contents($viewFile);

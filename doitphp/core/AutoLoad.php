@@ -107,7 +107,7 @@ abstract class AutoLoad {
                 $filePath = BASE_PATH . DS . str_replace('\\', DS, $className) . '.php';
                 if (!is_file($filePath)) {
                     //当使用命名空间的文件不存在时，提示错误信息
-                    Controller::halt('The File: ' . $filePath .' is not found !', 'Normal');
+                    Response::halt('The File: ' . $filePath .' is not found !');
                 }
                 Doit::loadFile($filePath);
                 return true;
@@ -117,7 +117,7 @@ abstract class AutoLoad {
                 //根据配置文件improt的引导设置，自动加载文件
                 if (!self::_loadImportConfigFile($className)) {
                     //最后，当运行上述自动加载规则，均没有加载所需要的文件时，提示错误信息
-                    Controller::halt('The Class: ' . $className .' is not found !', 'Normal');
+                    Response::halt('The Class: ' . $className .' is not found !');
                 }
             }
         }
@@ -175,7 +175,7 @@ abstract class AutoLoad {
                 return false;
             }
             //当所要加载的标签文件不存在时,显示错误提示信息
-            Controller::halt('The File: ' . $tagFilePath . ' is not found!', 'Normal');
+            Response::halt('The File: ' . $tagFilePath . ' is not found!');
         }
 
         //加载标签文件
