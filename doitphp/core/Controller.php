@@ -176,7 +176,51 @@ abstract class Controller {
      */
     public function deleteCookie($cookieName) {
 
-        return $this->instance('Cookie')->delete($cookieName, $default);
+        return $this->instance('Cookie')->delete($cookieName);
+    }
+
+    /**
+     * 获取某session变量的值
+     *
+     * @access public
+     *
+     * @param string $sessionName session变量名
+     * @param mixed $default 默认值
+     *
+     * @return mixed
+     */
+    public function getSession($sessionName = null, $default = null) {
+
+        return $this->instance('Session')->get($sessionName, $default);
+    }
+
+    /**
+     * 设置某session变量的值
+     *
+     * @access public
+     *
+     * @param string $sessionName session的变量名
+     * @param mixed $value session值
+     *
+     * @return boolean
+     */
+    public function setSession($sessionName, $value = null) {
+
+        return $this->instance('Session')->set($sessionName, $value);
+    }
+
+    /**
+     * 删除某session变量的值
+     *
+     * @access public
+     *
+     * @param string $sessionName session变量名
+     *
+     * @return boolean
+     */
+    public function deleteSession($sessionName) {
+
+        return $this->instance('Session')->delete($sessionName);
     }
 
     /**
@@ -733,7 +777,7 @@ abstract class Controller {
     public function __call($method, $args) {
 
         switch ($method) {
-	
+
             case 'env':
                 return call_user_func_array(array('Request', 'env'), $args);
 
