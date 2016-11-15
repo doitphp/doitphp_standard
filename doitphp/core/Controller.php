@@ -144,7 +144,7 @@ abstract class Controller {
      */
     public function getCookie($cookieName = null, $default = null) {
 
-        return $this->cookie->get($cookieName, $default);
+        return $this->instance('Cookie')->get($cookieName, $default);
     }
 
     /**
@@ -162,7 +162,7 @@ abstract class Controller {
      */
     public function setCookie($cookieName, $value, $expire = null, $path = null, $domain = null) {
 
-        return $this->cookie->set($cookieName, $value, $expire, $path, $domain);
+        return $this->instance('Cookie')->set($cookieName, $value, $expire, $path, $domain);
     }
 
     /**
@@ -699,18 +699,6 @@ abstract class Controller {
             case 'view':
                 return $this->getView();
 
-            case 'pager':
-                return $this->instance('Pagination');
-
-            case 'image':
-                return $this->instance('Image');
-
-            case 'cookie':
-                return $this->instance('Cookie');
-
-            case 'session':
-                return $this->instance('Session');
-
             default:
                 Response::halt('Undefined property: ' . get_class($this) . '::' . $name);
         }
@@ -731,19 +719,7 @@ abstract class Controller {
     public function __call($method, $args) {
 
         switch ($method) {
-
-            case 'encode':
-                return call_user_func_array(array('Html', 'encode'), $args);
-
-            case 'noCache':
-                return Response::noCache();
-
-            case 'charset':
-                return call_user_func_array(array('Response', 'charset'), $args);
-
-            case 'expires':
-                return call_user_func_array(array('Response', 'expires'), $args);
-
+	
             case 'env':
                 return call_user_func_array(array('Request', 'env'), $args);
 
