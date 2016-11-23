@@ -60,32 +60,11 @@ class Pagination {
     protected $_perCircle = 10;
 
     /**
-     * 分页程序的扩展功能开关,默认关闭
-     *
-     * @var boolean
-     */
-    protected $_ext = false;
-
-    /**
      * list中的坐标. 如:7,8,九,10,11这里的九为当前页,在list中排第三位,则$center为3
      *
      * @var integer
      */
     protected $_center = 3;
-
-    /**
-     * 是否为ajax分页模式
-     *
-     * @var boolean
-     */
-    protected $_isAjax = false;
-
-    /**
-     * ajax分页的动作名称
-     *
-     * @var string
-     */
-    protected $_ajaxActionName = null;
 
     /**
      * 分页css名
@@ -254,23 +233,6 @@ class Pagination {
     }
 
     /**
-     * 开启分页扩展
-     *
-     * @access public
-     *
-     * @param boolean $ext 是否开启分页扩展功能（true:是/false:否）
-     *
-     * @return object
-     */
-    public function ext($ext = true) {
-
-        //将$ext转化为小写字母.
-        $this->_ext = ($ext) ? true : false;
-
-        return $this;
-    }
-
-    /**
      * 设置分页列表的重心
      *
      * @access public
@@ -306,76 +268,6 @@ class Pagination {
         }
 
         return $this;
-    }
-
-    /**
-     * 开启ajax分页模式
-     *
-     * @access public
-     *
-     * @param string $action 动作名称
-     *
-     * @return object
-     */
-    public function ajax($action) {
-
-        if ($action) {
-            $this->_isAjax           = true;
-            $this->_ajaxActionName   = $action;
-        }
-
-        return  $this;
-    }
-
-    /**
-     * 输出处理完毕的分页HTML
-     *
-     * @access public
-     * @return string
-     */
-    public function output() {
-
-        //获取分页数组
-        $data = $this->_processData();
-
-        //获取HTML内容
-        $html = '<div class="doitphp_pagelist_box"><ul>';
-
-        //分析扩展信息
-        if ($data['ext'] === true && $this->note) {
-            $html .= str_replace(array('{$totalNum}', '{$totalPage}', '{$num}'), array($data['total'], $data['totalpage'], $data['num']), $this->note);
-        }
-
-        //分析上一页
-        if (isset($data['prepage'])) {
-            foreach ($data['prepage'] as $lines) {
-                $content = ($data['ajax'] === true) ? "<a href='{$lines['url']}' onclick='{$data['ajaxaction']}('{$lines['url']}'); return false;'>{$lines['text']}</a>" : "<a href='{$lines['url']}' target='_self'>{$lines['text']}</a>";
-                $html   .= '<li class="pagelist_ext">' . $content . '</li>';
-            }
-        }
-
-        //分析分页列表
-        if (isset($data['listpage'])) {
-            foreach ($data['listpage'] as $lines) {
-                if ($lines['current'] === true) {
-                    $html .= '<li class="pagelist_current">' . $lines['text'] . '</li>';
-                } else {
-                    $content = ($data['ajax'] === true) ? "<a href='{$lines['url']}' onclick='{$data['ajaxaction']}('{$lines['url']}'); return false;'>{$lines['text']}</a>" : "<a href='{$lines['url']}' target='_self'>{$lines['text']}</a>";
-                    $html .= '<li>' . $content . '</li>';
-                }
-            }
-        }
-
-        //分析下一页
-        if (isset($data['nextpage'])) {
-            foreach ($data['nextpage'] as $lines) {
-                $content = ($data['ajax'] === true) ? "<a href='{$lines['url']}' onclick='{$data['ajaxaction']}('{$lines['url']}'); return false;'>{$lines['text']}</a>" : "<a href='{$lines['url']}' target='_self'>{$lines['text']}</a>";
-                $html   .= '<li class="pagelist_ext">' . $content . '</li>';
-            }
-        }
-
-        $html .= '</ul></div>';
-        return $html;
     }
 
     /**
@@ -418,21 +310,15 @@ class Pagination {
             return $data;
         }
 
-        $data['total']     = $this->_total;
-        $data['num']       = $this->_num;
-        $data['totalpage'] = $this->_totalPages;
+        $data['totalList'] = $this->_total;
+        $data['perNum']    = $this->_num;
+        $data['totalPage'] = $this->_totalPages;
         $data['page']      = $this->_page;
         $data['url']       = $this->_url;
 
-        $data['ajax']      = $this->_isAjax;
-        if ($this->_isAjax) {
-            $data['ajaxAction'] = $this->_ajaxActionName;
-        }
-        $data['ext']       = $this->_ext;
-
         //分析上一页
         if ($this->_page != 1 && $this->_totalPages > 1) {
-            $data['prepage'] = array(
+            $data['prePage'] = array(
             array('text'=>$this->firstPage, 'url'=>$this->_url . 1),
             array('text'=>$this->prePage, 'url'=>$this->_url . ($this->_page - 1)),
             );
@@ -440,7 +326,7 @@ class Pagination {
 
         //分析下一页
         if ($this->_page != $this->_totalPages && $this->_totalPages > 1) {
-            $data['nextpage'] = array(
+            $data['nextPage'] = array(
             array('text'=>$this->nextPage, 'url'=>$this->_url . ($this->_page + 1)),
             array('text'=>$this->lastPage, 'url'=>$this->_url . $this->_totalPages),
             );
@@ -449,126 +335,25 @@ class Pagination {
         //分析分页列表
         if ($this->_totalPages > $this->_perCircle) {
             if ($this->_page + $this->_perCircle >= $this->_totalPages + $this->_center) {
-                $list_start   = $this->_totalPages - $this->_perCircle + 1;
-                $list_end     = $this->_totalPages;
+                $listStart   = $this->_totalPages - $this->_perCircle + 1;
+                $listEnd     = $this->_totalPages;
             } else {
-                $list_start   = ($this->_page>$this->_center) ? $this->_page - $this->_center + 1 : 1;
-                $list_end     = ($this->_page>$this->_center) ? $this->_page + $this->_perCircle-$this->_center : $this->_perCircle;
+                $listStart   = ($this->_page>$this->_center) ? $this->_page - $this->_center + 1 : 1;
+                $listEnd     = ($this->_page>$this->_center) ? $this->_page + $this->_perCircle-$this->_center : $this->_perCircle;
             }
         } else {
-            $list_start       = 1;
-            $list_end         = $this->_totalPages;
+            $listStart       = 1;
+            $listEnd         = $this->_totalPages;
         }
 
-        for($i = $list_start; $i <= $list_end; $i ++) {
+        for($i = $listStart; $i <= $listEnd; $i ++) {
+            $data['pageList'][$i] = array('pageId'=>$i, 'active'=>0, 'pageUrl'=> $this->_url . $i);
             //分析当前页
             if ($i == $this->_page) {
-                $data['listpage'][] = array('text'=>$i, 'current'=>true);
-            } else {
-                $data['listpage'][] = array('text'=>$i, 'current'=>false, 'url'=> $this->_url . $i);
+                $data['pageList'][$i]['active'] = 1;
             }
         }
 
         return $data;
-    }
-
-    /**
-     * 输出下拉菜单式分页的HTML(仅限下拉菜单)
-     *
-     * @access public
-     *
-     * @return mixed
-     */
-    public function select() {
-
-        //获取分页数组
-        $data = $this->_processData();
-        if (!$data) {
-            return null;
-        }
-
-        $string = '<select name="doitphp_select_pagelist" class="pagelist_select_box" onchange="self.location.href=this.options[this.selectedIndex].value">';
-        for ($i = 1; $i <= $data['totalpage']; $i ++) {
-            $string .= ($i == $data['page']) ? '<option value="' . $data['url'] . $i . '" selected="selected">' . $i . '</option>' : '<option value="' . $data['url'] . $i . '">' . $i . '</option>';
-        }
-        $string .= '</select>';
-
-        return $string;
-    }
-
-    /**
-     * 加载pager的CSS文件
-     *
-     * @access public
-     *
-     * @param string $styleName
-     *
-     * @return string
-     */
-    public function loadCss($styleName = 'classic') {
-
-        //设置分页CSS样式
-        if (!$this->_styleFile) {
-            $this->setMode($styleName);
-        }
-
-        $cssFile = Controller::getBaseUrl() . '/assets/css/' . $this->_styleFile;
-
-        return "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . $cssFile . "\"/>\r";
-    }
-
-    /**
-     * 视图中加载pager的CSS文件
-     *
-     * 注：本方法虽与loadCss()功能一样，不过本方法是供在视图中使用的，主要用在ajax分页时。如：Pagination::loadCssFile();
-     *
-     * @access public
-     *
-     * @param string $styleName
-     *
-     * @return string
-     */
-    public static function loadCssFile($styleName = 'classic') {
-
-        //设置分页CSS样式
-        switch ($styleName) {
-            case 'classic':
-                $_styleFile = 'doitphp_pagelist_classic.min.css';
-                break;
-
-            default:
-                $_styleFile = 'doitphp_pagelist_default.min.css';
-        }
-
-        $cssFile = Controller::getBaseUrl() . '/assets/css/' . $_styleFile;
-
-        return "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . $cssFile . "\"/>\r";
-    }
-
-    /**
-     * 设置分页的样式
-     *
-     * 注：一般情况下用不到本方法，除非使用ajax分页时
-     *
-     * @access public
-     *
-     * @param string $styleName 分页样式名
-     *
-     * @return object
-     */
-    public function setMode($styleName = 'classic') {
-
-        switch ($styleName) {
-
-            case 'classic':
-                $this->_styleFile = 'doitphp_pagelist_classic.min.css';
-                break;
-
-            default:
-                $this->_styleFile = 'doitphp_pagelist_default.min.css';
-                $this->note       = '<li class="pagelist_note">共{$totalNum}条{$totalPage}页 {$num}条/页</li>';
-        }
-
-        return $this;
     }
 }
