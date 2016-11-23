@@ -512,7 +512,7 @@ class Pagination {
             $this->setMode($styleName);
         }
 
-        $cssFile = Controller::getBaseUrl() . '/assets/doit/images/' . $this->_styleFile;
+        $cssFile = Controller::getBaseUrl() . '/assets/css/' . $this->_styleFile;
 
         return "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . $cssFile . "\"/>\r";
     }
@@ -540,7 +540,7 @@ class Pagination {
                 $_styleFile = 'doitphp_pagelist_default.min.css';
         }
 
-        $cssFile = Controller::getBaseUrl() . '/assets/doit/images/' . $_styleFile;
+        $cssFile = Controller::getBaseUrl() . '/assets/css/' . $_styleFile;
 
         return "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . $cssFile . "\"/>\r";
     }
