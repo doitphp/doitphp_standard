@@ -319,16 +319,16 @@ class Pagination {
         //分析上一页
         if ($this->_page != 1 && $this->_totalPages > 1) {
             $data['prePage'] = array(
-            array('text'=>$this->firstPage, 'url'=>$this->_url . 1),
-            array('text'=>$this->prePage, 'url'=>$this->_url . ($this->_page - 1)),
+            array('pageId'=>$this->firstPage, 'pageUrl'=>$this->_url . 1),
+            array('pageId'=>$this->prePage, 'pageUrl'=>$this->_url . ($this->_page - 1)),
             );
         }
 
         //分析下一页
         if ($this->_page != $this->_totalPages && $this->_totalPages > 1) {
             $data['nextPage'] = array(
-            array('text'=>$this->nextPage, 'url'=>$this->_url . ($this->_page + 1)),
-            array('text'=>$this->lastPage, 'url'=>$this->_url . $this->_totalPages),
+            array('pageId'=>$this->nextPage, 'pageUrl'=>$this->_url . ($this->_page + 1)),
+            array('pageId'=>$this->lastPage, 'pageUrl'=>$this->_url . $this->_totalPages),
             );
         }
 
