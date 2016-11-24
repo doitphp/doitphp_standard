@@ -102,12 +102,12 @@ abstract class Response {
      * @access public
      *
      * @param string $message 所要显示的提示信息
-     * @param string $gotoUrl 所要跳转的自定义网址
-     * @param integer $limitTime 显示信息的有效期,注:(单位:秒) 默认为3秒
+     * @param string $targetUrl 所要跳转的自定义网址
+     * @param integer $holdTime 显示信息的有效期,注:(单位:秒) 默认为3秒
      *
      * @return string
      */
-    public static function showMsg($message, $gotoUrl = null, $limitTime = 3) {
+    public static function showMsg($message, $targetUrl = null, $holdTime = 3) {
 
         //参数分析
         if (!$message) {
@@ -120,18 +120,18 @@ abstract class Response {
         }
 
         //当自定义跳转网址存在时
-        if ($gotoUrl) {
-            $limitTime    = 1000 * $limitTime;
+        if ($targetUrl) {
+            $holdTime = 1000 * $holdTime;
             //分析自定义网址是否为返回页
-            if ($gotoUrl == -1) {
-                $gotoUrl  = 'javascript:history.go(-1);';
-                $message .= '<br/><a href="javascript:history.go(-1);" target="_self">如果你的浏览器没反应,请点击这里...</a>';
+            if ($targetUrl == -1) {
+                $targetUrl = 'javascript:history.go(-1);';
+                $message  .= '<br/><a href="javascript:history.go(-1);" target="_self">如果你的浏览器没反应,请点击这里...</a>';
             } else{
                 //防止网址过长，有换行引起跳转变不正确
-                $gotoUrl  = str_replace(array("\n","\r"), '', $gotoUrl);
-                $message .= '<br/><a href="' . $gotoUrl . '" target="_self">如果你的浏览器没反应,请点击这里...</a>';
+                $targetUrl = str_replace(array("\n","\r"), '', $targetUrl);
+                $message  .= '<br/><a href="' . $targetUrl . '" target="_self">如果你的浏览器没反应,请点击这里...</a>';
             }
-            $message .= '<script type="text/javascript">function doitRedirectUrl(url){location.href=url;}setTimeout("doitRedirectUrl(\'' . $gotoUrl . '\')", ' . $limitTime . ');</script>';
+            $message .= '<script type="text/javascript">function redirectTargetUrl(targetUrl){location.href=targetUrl;}setTimeout("redirectTargetUrl(\'' . $targetUrl . '\')", ' . $holdTime . ');</script>';
         }
 
         $messageTemplateFile = BASE_PATH . '/views/errors/message.php';
