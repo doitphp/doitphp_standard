@@ -26,4 +26,4 @@ $config = APP_ROOT . '/application/config/application.php';
 /**
  * 启动应用程序(网站)进程
  */
-doit::run($config);
+Doit::run($config);
