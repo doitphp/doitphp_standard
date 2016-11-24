@@ -109,13 +109,6 @@ class Pagination {
     public $lastPage = '最末页';
 
     /**
-     * 分页附属说明
-     *
-     * @var string
-     */
-    public $note = null;
-
-    /**
      * 获取总页数
      *
      * @access protected
@@ -310,11 +303,10 @@ class Pagination {
             return $data;
         }
 
-        $data['totalList'] = $this->_total;
-        $data['perNum']    = $this->_num;
-        $data['totalPage'] = $this->_totalPages;
-        $data['page']      = $this->_page;
-        $data['url']       = $this->_url;
+        $data['listTotalNum']   = $this->_total;
+        $data['perPageListNum'] = $this->_num;
+        $data['pageTotalNum']   = $this->_totalPages;
+        $data['page']           = $this->_page;
 
         //分析上一页
         if ($this->_page != 1 && $this->_totalPages > 1) {
