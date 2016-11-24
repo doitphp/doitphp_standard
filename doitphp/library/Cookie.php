@@ -101,7 +101,7 @@ class Cookie {
         $path   = is_null($path) ? $this->_options['path'] : $path;
         $domain = is_null($domain) ? $this->_options['domain'] : $domain;
 
-        $expire = $_SERVER['REQUEST_TIME'] + $this->_options['expire'];
+        $expire = $_SERVER['REQUEST_TIME'] + $expire;
         if ($this->_options['secretkey']) {
             $value = Doit::singleton('Encrypt')->encode(serialize($value), $this->_options['secretkey']);
         } else {
