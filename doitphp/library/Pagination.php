@@ -310,18 +310,14 @@ class Pagination {
 
         //分析上一页
         if ($this->_page != 1 && $this->_totalPages > 1) {
-            $data['prePage'] = array(
-            array('pageId'=>$this->firstPage, 'pageUrl'=>$this->_url . 1),
-            array('pageId'=>$this->prePage, 'pageUrl'=>$this->_url . ($this->_page - 1)),
-            );
+            $data['firstPage'] = array('text'=>$this->firstPage, 'url'=>$this->_url . 1);
+            $data['prePage']   = array('text'=>$this->prePage, 'url'=>$this->_url . ($this->_page - 1));
         }
 
         //分析下一页
         if ($this->_page != $this->_totalPages && $this->_totalPages > 1) {
-            $data['nextPage'] = array(
-            array('pageId'=>$this->nextPage, 'pageUrl'=>$this->_url . ($this->_page + 1)),
-            array('pageId'=>$this->lastPage, 'pageUrl'=>$this->_url . $this->_totalPages),
-            );
+            $data['nextPage'] = array('text'=>$this->nextPage, 'url'=>$this->_url . ($this->_page + 1));
+            $data['lastPage'] = array('text'=>$this->lastPage, 'url'=>$this->_url . $this->_totalPages);
         }
 
         //分析分页列表
@@ -339,7 +335,7 @@ class Pagination {
         }
 
         for($i = $listStart; $i <= $listEnd; $i ++) {
-            $data['pageList'][$i] = array('pageId'=>$i, 'active'=>0, 'pageUrl'=> $this->_url . $i);
+            $data['pageList'][$i] = array('text'=>$i, 'active'=>0, 'url'=> $this->_url . $i);
             //分析当前页
             if ($i == $this->_page) {
                 $data['pageList'][$i]['active'] = 1;
