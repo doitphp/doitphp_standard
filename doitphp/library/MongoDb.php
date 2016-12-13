@@ -31,7 +31,7 @@ class MongoDb {
      *
      * @var object
      */
-    protected $_dbLink = null;
+    protected $_dbConnection = null;
 
     /**
      * mongo实例化对象
@@ -83,11 +83,11 @@ class MongoDb {
             $this->_mongo = new Mongo($params['dsn'], $params['option']);
 
             //连接mongo数据库
-            $this->_dbLink = $this->_mongo->selectDB($params['dbname']);
+            $this->_dbConnection = $this->_mongo->selectDB($params['dbname']);
 
             //用户登录
             if (isset($params['username']) && isset($params['password'])) {
-                $this->_dbLink->authenticate($params['username'], $params['password']);
+                $this->_dbConnection->authenticate($params['username'], $params['password']);
             }
 
             return true;
@@ -111,7 +111,7 @@ class MongoDb {
      */
     public function collection($collection) {
 
-        return $this->_dbLink->selectCollection($collection);
+        return $this->_dbConnection->selectCollection($collection);
     }
 
     /**
@@ -248,7 +248,7 @@ class MongoDb {
      */
     public function gridFS($prefix = 'fs')
     {
-        return $this->_dbLink->getGridFS($prefix);
+        return $this->_dbConnection->getGridFS($prefix);
     }
 
     /**
@@ -262,8 +262,8 @@ class MongoDb {
      */
     public function __destruct() {
 
-        if ($this->_dbLink) {
-            $this->_dbLink = null;
+        if ($this->_dbConnection) {
+            $this->_dbConnection = null;
         }
 
         if ($this->_mongo) {
