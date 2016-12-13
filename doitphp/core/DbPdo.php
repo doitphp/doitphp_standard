@@ -97,7 +97,7 @@ class DbPdo {
                 Log::write("Database server connect error! Error Code:{$exception->getCode()} Error Message:{$exception->getMessage()}", 'Warning');
 
                 //提示错误信息
-                Controller::showMsg('数据库连接失败！');
+                Response::showMsg('数据库连接失败！');
             }
 
             //抛出异常信息
@@ -510,7 +510,7 @@ class DbPdo {
             Log::write("SQL execute error! SQL:{$sql} Error Message:" . $exception->getMessage());
 
             //提示错误信息
-            Controller::showMsg('SQL语句执行错误！详细情况请查看日志。');
+            Response::showMsg('SQL语句执行错误！详细情况请查看日志。');
         }
 
         //抛出异常信息

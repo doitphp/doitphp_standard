@@ -47,7 +47,7 @@ class Ftp {
         try {
             $this->_linkId = @ftp_connect($server, $port);
             if (!@ftp_login($this->_linkId, $username, $password)){
-                Controller::showMsg('Ftp Server 登陆失败');
+                Response::showMsg('Ftp Server 登陆失败');
             }
 
             //打开被动模拟

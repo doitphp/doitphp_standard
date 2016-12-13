@@ -38,7 +38,7 @@ class FileDownload {
 
         //分析文件是否存在
         if (!is_file($file)) {
-            Controller::showMsg('Error 404:The file not found!');
+            Response::showMsg('Error 404:The file not found!');
         }
 
         //分析文件名
