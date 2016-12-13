@@ -191,7 +191,7 @@ class View {
 
         //分析,加载,显示layout视图内容
         if ($this->_layout) {
-            $layoutFile = $this->_viewPath . '/layout/' . $this->_layout . VIEW_EXT;
+            $layoutFile = $this->_viewPath . '/layouts/' . $this->_layout . VIEW_EXT;
             if (is_file($layoutFile)) {
                 ob_start();
                 include $layoutFile;

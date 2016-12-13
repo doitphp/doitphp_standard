@@ -216,7 +216,7 @@ class Template {
 
         //分析layout视图
         if ($this->_layout) {
-            $layoutFile   = $this->_viewPath . '/layout/' . $this->_layout . VIEW_EXT;
+            $layoutFile   = $this->_viewPath . '/layouts/' . $this->_layout . VIEW_EXT;
             $layoutStatus = is_file($layoutFile) ? true : false;
         } else {
             $layoutStatus = false;
