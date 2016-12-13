@@ -41,7 +41,7 @@ abstract class Widget extends Controller {
 
         //获取当前视图的目录(当视图文件的格式为PHP时)
         if (VIEW_EXT == Configure::VIEW_EXT_PHP) {
-            $this->_viewPath = BASE_PATH . '/widgets/views';
+            $this->_viewPath = BASE_PATH . '/views/widgets';
         }
 
         return true;

@@ -52,7 +52,7 @@ class WidgetTemplate extends Template {
     public function __construct() {
 
         //设置挂件视图模板目录的路径
-        $this->_viewPath    = BASE_PATH . '/widgets/views';
+        $this->_viewPath    = BASE_PATH . '/views/widgets';
         //设置视图编译缓存文件的默认目录路径
         $this->_compilePath = CACHE_PATH . '/views/widgets';
 
