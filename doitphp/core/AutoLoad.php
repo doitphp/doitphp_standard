@@ -46,7 +46,6 @@ abstract class AutoLoad {
     'Curl'              => 'library/Curl.php',
     'Client'            => 'library/Client.php',
     'Validation'        => 'library/Validation.php',
-    'Xml'               => 'library/Xml.php',
     'FileDownload'      => 'library/FileDownload.php',
     'FileUpload'        => 'library/FileUpload.php',
     'Excel'             => 'library/Excel.php',
