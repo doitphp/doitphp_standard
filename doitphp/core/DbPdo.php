@@ -38,7 +38,7 @@ class DbPdo {
      *
      * @var object
      */
-    protected $_dbLink = null;
+    protected $_dbConnection = null;
 
     /**
      * 执行SQL语句后的返回对象
@@ -87,7 +87,7 @@ class DbPdo {
             );
 
             //实例化数据库连接
-            $this->_dbLink = new PDO($params['dsn'], $params['username'], $params['password'], $flags);
+            $this->_dbConnection = new PDO($params['dsn'], $params['username'], $params['password'], $flags);
 
         } catch (PDOException $exception) {
 
@@ -105,15 +105,15 @@ class DbPdo {
         }
 
         //设置数据编码
-        $driverName = $this->_dbLink->getAttribute(PDO::ATTR_DRIVER_NAME);
+        $driverName = $this->_dbConnection->getAttribute(PDO::ATTR_DRIVER_NAME);
         switch ($driverName) {
             case 'mysql':
             case 'pgsql':
-                $this->_dbLink->exec("SET NAMES {$params['charset']}");
+                $this->_dbConnection->exec("SET NAMES {$params['charset']}");
                 break;
 
             case 'sqlsrv':
-                $this->_dbLink->setAttribute(PDO::SQLSRV_ATTR_ENCODING, $params['charset']);
+                $this->_dbConnection->setAttribute(PDO::SQLSRV_ATTR_ENCODING, $params['charset']);
                 break;
         }
 
@@ -129,7 +129,7 @@ class DbPdo {
      */
     public function getDbConnection() {
 
-        return $this->_dbLink;
+        return $this->_dbConnection;
     }
 
     /**
@@ -198,7 +198,7 @@ class DbPdo {
 
         try {
             //执行SQL语句
-            $sth = $this->_dbLink->prepare($sql);
+            $sth = $this->_dbConnection->prepare($sql);
             if (!$params) {
                 $result = $sth->execute();
             } else {
@@ -328,18 +328,18 @@ class DbPdo {
      *
      * @example
      * 例一：
-     * $erronInfo = $this->lastError();
+     * $erronInfo = $this->getLastError();
      *
      * 例二：
-     * $sth = $this->_dbLink->prepare('select * from tablename');
+     * $sth = $this->_dbConnection->prepare('select * from tablename');
      * $sth->execute();
      *
-     * $erronInfo = $this->lastError($sth);
+     * $erronInfo = $this->getLastError($sth);
      *
      */
-    public function lastError(PDOStatement $query = null) {
+    public function getLastError(PDOStatement $query = null) {
 
-        $error = (!$query) ? $this->_dbLink->errorInfo() : $query->errorInfo();
+        $error = (!$query) ? $this->_dbConnection->errorInfo() : $query->errorInfo();
         if (!$error[2]) {
             return null;
         }
@@ -462,7 +462,7 @@ class DbPdo {
 
         try {
             //执行SQL语句
-            $sth = $this->_dbLink->prepare($sql);
+            $sth = $this->_dbConnection->prepare($sql);
             if (!$params) {
                 $result = $sth->execute();
             } else {
@@ -524,9 +524,9 @@ class DbPdo {
      *
      * @return integer
      */
-    public function lastInsertId() {
+    public function getLastInsertId() {
 
-        return $this->_dbLink->lastInsertId();
+        return $this->_dbConnection->lastInsertId();
     }
 
     /**
@@ -539,7 +539,7 @@ class DbPdo {
     public function startTrans() {
 
         if ($this->_transactions == false) {
-            $this->_dbLink->beginTransaction();
+            $this->_dbConnection->beginTransaction();
             $this->_transactions = true;
             //SQL日志记录
             $this->_logQuery('BEGIN');
@@ -559,7 +559,7 @@ class DbPdo {
 
         //当事务处理开启时
         if ($this->_transactions == true) {
-            if ($this->_dbLink->commit()) {
+            if ($this->_dbConnection->commit()) {
                 $this->_transactions = false;
                 //SQL日志记录
                 $this->_logQuery('COMMIT');
@@ -580,7 +580,7 @@ class DbPdo {
 
         //当事务处理开启时
         if ($this->_transactions == true) {
-            if ($this->_dbLink->rollBack()) {
+            if ($this->_dbConnection->rollBack()) {
                 $this->_transactions = false;
                 //SQL日志记录
                 $this->_logQuery('ROLLBACK');
@@ -607,7 +607,7 @@ class DbPdo {
         }
 
         if (!is_array($value)) {
-            return trim($this->_dbLink->quote($value));
+            return trim($this->_dbConnection->quote($value));
         }
 
         //当参数为数组时
@@ -621,11 +621,11 @@ class DbPdo {
      *
      * @param string $tableName 所要操作的数据表名称
      * @param array $data 所要写入的数据内容。注：数据必须为数组
-     * @param boolean $returnId 是否返回数据为:last insert id
+     * @param boolean $isReturnId 是否返回数据为:last insert id
      *
      * @return mixed
      */
-    public function insert($tableName, $data, $returnId = false) {
+    public function insert($tableName, $data, $isReturnId = false) {
 
         //参数分析
         if(!$tableName || !$data || !is_array($data)) {
@@ -633,22 +633,22 @@ class DbPdo {
         }
 
         //处理数据表字段与数据的对应关系
-        $contentArray  = array_values($data);
+        $valuesArray = array_values($data);
 
-        $fieldString   = implode(',', array_keys($data));
-        $contentString = rtrim(str_repeat('?,', count($contentArray)), ',');
+        $fieldString = implode(',', array_keys($data));
+        $valueString = rtrim(str_repeat('?,', count($valuesArray)), ',');
 
         //组装SQL语句
-        $sql = "INSERT INTO {$tableName} ({$fieldString}) VALUES ({$contentString})";
+        $sql = "INSERT INTO {$tableName} ({$fieldString}) VALUES ({$valueString})";
 
-        $reulst = $this->execute($sql, $contentArray);
+        $reulst = $this->execute($sql, $valuesArray);
 
         //清空不必要的内容占用
-        unset($fieldString, $contentString, $contentString);
+        unset($fieldString, $valueString, $valuesArray);
 
         //当返回数据需要返回insert id时
-        if ($reulst && $returnId === true) {
-            return $this->lastInsertId();
+        if ($reulst && $isReturnId === true) {
+            return $this->getLastInsertId();
         }
 
         return $reulst;
@@ -672,18 +672,18 @@ class DbPdo {
         }
 
         //处理数据表字段与数据的对应关系
-        $contentArray  = array_values($data);
+        $valuesArray = array_values($data);
 
-        $fieldString   = implode(',', array_keys($data));
-        $contentString = rtrim(str_repeat('?,', count($contentArray)), ',');
+        $fieldString = implode(',', array_keys($data));
+        $valueString = rtrim(str_repeat('?,', count($valuesArray)), ',');
 
         //组装SQL语句
-        $sql = "REPLACE INTO {$tableName} ({$fieldString}) VALUES ({$contentString})";
+        $sql = "REPLACE INTO {$tableName} ({$fieldString}) VALUES ({$valueString})";
 
-        $reulst = $this->execute($sql, $contentArray);
+        $reulst = $this->execute($sql, $valuesArray);
 
         //清空不必要的内容占用
-        unset($fieldString, $contentString, $contentString);
+        unset($fieldString, $valueString, $valuesArray);
 
         return $reulst;
     }
@@ -707,9 +707,9 @@ class DbPdo {
             return false;
         }
 
-        $fieldArray    = array_keys($data);
-        $contentString = implode('=?,', $fieldArray) . '=?';
-        $params        = array_values($data);
+        $fieldArray  = array_keys($data);
+        $valueString = implode('=?,', $fieldArray) . '=?';
+        $params      = array_values($data);
 
         //分析SQL语句的条件
         if ($value) {
@@ -721,7 +721,7 @@ class DbPdo {
         }
 
         //组装SQL语句
-        $sql = "UPDATE {$tableName} SET {$contentString}";
+        $sql = "UPDATE {$tableName} SET {$valueString}";
         if ($where) {
             $sql .= " WHERE {$where}";
         }
@@ -729,7 +729,7 @@ class DbPdo {
         $reulst = $this->execute($sql, $params);
 
         //清除不必要内存占用
-        unset($fieldArray, $contentString, $params);
+        unset($fieldArray, $valueString, $params);
 
         return $reulst;
     }
@@ -830,8 +830,8 @@ class DbPdo {
      */
     public function __destruct() {
 
-        if (isset($this->_dbLink)) {
-            $this->_dbLink = null;
+        if (isset($this->_dbConnection)) {
+            $this->_dbConnection = null;
         }
 
         return true;

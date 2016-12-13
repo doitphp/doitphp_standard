@@ -24,7 +24,7 @@ class DbCommand {
      *
      * @var object
      */
-    protected $_dbLink = null;
+    protected $_dbConnection = null;
 
     /**
      * 数据表名的前缀
@@ -60,7 +60,7 @@ class DbCommand {
      */
     public function __construct($modelObject) {
 
-        $this->_dbLink = $modelObject->_slave();
+        $this->_dbConnection = $modelObject->_slave();
         $this->_prefix = $modelObject->_prefix;
 
         return true;
@@ -243,7 +243,7 @@ class DbCommand {
     protected function _prepare($sql, $value) {
 
         $sql   = str_replace('?', '%s', $sql);
-        $value = $this->_dbLink->escape($value);
+        $value = $this->_dbConnection->escape($value);
 
         return vsprintf($sql, $value);
     }
@@ -488,7 +488,7 @@ class DbCommand {
         //获取完整的SQL查询语句。
         $sql = $this->getSql();
 
-        return $this->_dbLink->query($sql);
+        return $this->_dbConnection->query($sql);
     }
 
     /**
@@ -531,7 +531,7 @@ class DbCommand {
      */
     public function fetchRow($model = 'PDO::FETCH_ASSOC') {
 
-        return $this->_dbLink->fetchRow($model);
+        return $this->_dbConnection->fetchRow($model);
     }
 
     /**
@@ -547,7 +547,7 @@ class DbCommand {
      */
     public function fetchAll($model = 'PDO::FETCH_ASSOC') {
 
-        return $this->_dbLink->fetchAll($model);
+        return $this->_dbConnection->fetchAll($model);
     }
 
     /**
@@ -677,7 +677,7 @@ class DbCommand {
      */
     public function __destruct() {
 
-        $this->_dbLink = null;
+        $this->_dbConnection = null;
         $this->_reset();
 
         return true;

@@ -479,9 +479,9 @@ class Model {
      * @access public
      * @return integer
      */
-    public function lastInsertId() {
+    public function getLastInsertId() {
 
-        return $this->_master()->lastInsertId();
+        return $this->_master()->getLastInsertId();
     }
 
     /**
@@ -573,11 +573,11 @@ class Model {
      * @access public
      *
      * @param array $data 所要写入的数据内容。注：数据必须为数组
-     * @param boolean $returnId 是否返回数据为:last insert id
+     * @param boolean $isReturnId 是否返回数据为:last insert id
      *
      * @return mixed
      */
-    public function insert($data, $returnId = false) {
+    public function insert($data, $isReturnId = false) {
 
         //参数分析
         if (!$data || !is_array($data)) {
@@ -596,7 +596,7 @@ class Model {
         //清空不必要的内存占用
         unset($data);
 
-        return $this->_master()->insert($tableName, $insertArray, $returnId);
+        return $this->_master()->insert($tableName, $insertArray, $isReturnId);
     }
 
     /**
