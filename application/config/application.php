@@ -96,3 +96,13 @@ if (!defined('IN_DOIT')) {
 //$config['db']['dsn'] = 'mysql:host=yourHost;dbname=yourDbname';
 //$config['db']['username'] = 'yourUsername';
 //$config['db']['password'] = 'yourPassword';
+
+/**
+ * 设置Cookie生存周期
+ */
+ //$config['cookie']['expire'] = 3600;
+
+ /**
+ * 设置Session生存周期
+ */
+ //$config['session']['expire'] = 3600;
