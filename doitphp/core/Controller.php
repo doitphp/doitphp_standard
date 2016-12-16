@@ -70,7 +70,7 @@ abstract class Controller {
      * @access public
      *
      * @param string $key 所要获取$_GET的参数名
-     * @param mixed $default 默认参数, 注:只有$string不为数组时有效
+     * @param mixed $default 默认参数, 注:只有$key不为数组时才有效
      * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true：是/ false：否）
      *
      * @return mixed
@@ -88,7 +88,7 @@ abstract class Controller {
      * @access public
      *
      * @param string $key 所要获取$_POST的参数名称
-     * @param mixed $default 默认参数, 注:只有$string不为数组时有效
+     * @param mixed $default 默认参数, 注:只有$key不为数组时才有效
      * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true：是/ false：否）
      *
      * @return mixed
@@ -106,7 +106,7 @@ abstract class Controller {
      * @access public
      *
      * @param string $key 所要获取的参数名称
-     * @param mixed $default 默认参数, 注:只有$string不为数组时有效
+     * @param mixed $default 默认参数, 注:只有$key不为数组时才有效
      * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true：是/ false：否）
      *
      * @return mixed
