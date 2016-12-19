@@ -87,13 +87,13 @@ class Curl {
      *
      * @access public
      *
-     * @param boolean $isOn 是否开启
+     * @param boolean $isTurnOn 是否开启
      *
      * @return object
      */
-    public function setCookieStatus($isOn = true) {
+    public function setCookieStatus($isTurnOn = true) {
 
-        self::$_cookieSupport = $isOn;
+        self::$_cookieSupport = $isTurnOn;
 
         return $this;
     }
