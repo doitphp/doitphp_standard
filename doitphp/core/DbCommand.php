@@ -309,7 +309,7 @@ class DbCommand {
      *
      * @access public
      *
-     * @param string|array $where 条件语句
+     * @param mixed $where 条件语句
      * @param string $value    数据表某字段的数据值
      *
      * @return object
@@ -335,7 +335,7 @@ class DbCommand {
      *
      * @access public
      *
-     * @param string|array $where 条件语句
+     * @param mixed $where 条件语句
      * @param string $value    数据表某字段的数据值
      *
      * @return object
