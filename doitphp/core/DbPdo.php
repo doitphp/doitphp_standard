@@ -182,7 +182,7 @@ class DbPdo {
      *
      * @return boolean
      */
-    public function execute($sql, $params = null) {
+    public function execute($sql, $params = array()) {
 
         //参数分析
         if (!$sql) {
@@ -227,14 +227,14 @@ class DbPdo {
      *
      * @access public
      *
-     * @param string $model 返回数据的索引类型：字段型/数据型 等。默认：字段型
+     * @param string $mode 返回数据的索引类型：字段型/数据型 等。默认：字段型
      *
      * @return array
      */
-    public function fetchRow($model = PDO::FETCH_ASSOC) {
+    public function fetchRow($mode = PDO::FETCH_ASSOC) {
 
         //参数分析
-        if (!$model) {
+        if (!$mode) {
             return false;
         }
 
@@ -242,7 +242,7 @@ class DbPdo {
             return false;
         }
 
-        $myrow = $this->_query->fetch($model);
+        $myrow = $this->_query->fetch($mode);
         $this->_query->closeCursor();
 
         //重值$this->_query
@@ -256,14 +256,14 @@ class DbPdo {
      *
      * @access public
      *
-     * @param string $model 返回数据的索引类型：字段型/数据型 等。默认：字段型
+     * @param string $mode 返回数据的索引类型：字段型/数据型 等。默认：字段型
      *
      * @return array
      */
-    public function fetchAll($model = PDO::FETCH_ASSOC) {
+    public function fetchAll($mode = PDO::FETCH_ASSOC) {
 
         //参数分析
-        if (!$model) {
+        if (!$mode) {
             return false;
         }
 
@@ -271,7 +271,7 @@ class DbPdo {
             return false;
         }
 
-        $myrow = $this->_query->fetchAll($model);
+        $myrow = $this->_query->fetchAll($mode);
         $this->_query->closeCursor();
 
         //重值$this->_query
@@ -770,10 +770,10 @@ class DbPdo {
      * @access public
      *
      * @param string $tableName 数据表名
-     * @param boolean $extItem 数据返回类型选项，即是否返回完成的信息(包含扩展信息)。true:含扩展信息/false:不含扩展信息
+     * @param boolean $isExtStatus 数据返回类型选项，即是否返回完成的信息(包含扩展信息)。true:含扩展信息/false:不含扩展信息
      * @return array
      */
-    public function getTableInfo($tableName, $extItem = false) {
+    public function getTableInfo($tableName, $isExtStatus = false) {
 
         //参数分析
         if (!$tableName) {
@@ -781,7 +781,7 @@ class DbPdo {
         }
 
         $fieldList = $this->getAll("SHOW FIELDS FROM {$tableName}");
-        if ($extItem === true) {
+        if ($isExtStatus === true) {
             return $fieldList;
         }
 
