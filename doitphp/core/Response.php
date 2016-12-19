@@ -125,11 +125,11 @@ abstract class Response {
             //分析自定义网址是否为返回页
             if ($targetUrl == -1) {
                 $targetUrl = 'javascript:history.go(-1);';
-                $message  .= '<br/><a href="javascript:history.go(-1);" target="_self">如果你的浏览器没反应,请点击这里...</a>';
+                $message  .= '<br><a href="javascript:history.go(-1);" target="_self">如果你的浏览器没反应,请点击这里...</a>';
             } else{
                 //防止网址过长，有换行引起跳转变不正确
                 $targetUrl = str_replace(array("\n","\r"), '', $targetUrl);
-                $message  .= '<br/><a href="' . $targetUrl . '" target="_self">如果你的浏览器没反应,请点击这里...</a>';
+                $message  .= '<br><a href="' . $targetUrl . '" target="_self">如果你的浏览器没反应,请点击这里...</a>';
             }
             $message .= '<script type="text/javascript">function redirectTargetUrl(targetUrl){location.href=targetUrl;}setTimeout("redirectTargetUrl(\'' . $targetUrl . '\')", ' . $holdTime . ');</script>';
         }
@@ -213,7 +213,7 @@ abstract class Response {
                     break;
                 }
                 $argsString   = ($trace['args'] && is_array($trace['args'])) ? '(' . implode('.', $trace['args']) . ')': '';
-                $traceString .= "#{$key} {$trace['file']}({$trace['line']}){$trace['class']}{$trace['type']}{$trace['function']}{$argsString}<br/>";
+                $traceString .= "#{$key} {$trace['file']}({$trace['line']}){$trace['class']}{$trace['type']}{$trace['function']}{$argsString}<br>";
             }
         }
 

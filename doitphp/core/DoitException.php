@@ -26,7 +26,7 @@ class DoitException extends Exception {
         //分析获取异常信息
         $code         = $this->getCode();
         $exceptionMsg = $this->getMessage();
-        $message      = ($code ? "Error Code:{$code}<br/>" : '') . ($exceptionMsg ? "Error Message:{$exceptionMsg}" : '');
+        $message      = ($code ? "Error Code:{$code}<br>" : '') . ($exceptionMsg ? "Error Message:{$exceptionMsg}" : '');
 
         $line = $this->getLine();
         $sourceFile = $this->getFile() . (!$line ? '' : "({$line})");
@@ -39,7 +39,7 @@ class DoitException extends Exception {
                 if ($key > 2) {
                     break;
                 }
-                $traceString .= "#{$key} {$trace['file']}({$trace['line']})<br/>";
+                $traceString .= "#{$key} {$trace['file']}({$trace['line']})<br>";
             }
         }
 
@@ -53,7 +53,7 @@ class DoitException extends Exception {
         $exceptionMessage = ob_get_clean();
 
         if (DOIT_DEBUG === false) {
-            $exceptionMsg = str_replace('<br/>', ' ', $exceptionMsg);
+            $exceptionMsg = str_replace('<br>', ' ', $exceptionMsg);
             $logContent   = ((!$code) ? "" : "Error Code:{$code} ") . "Error Message:{$exceptionMsg} File:{$sourceFile}";
             //写入程序运行日志
             Log::write($logContent);

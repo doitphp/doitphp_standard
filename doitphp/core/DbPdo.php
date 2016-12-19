@@ -101,7 +101,7 @@ class DbPdo {
             }
 
             //抛出异常信息
-            throw new DoitException('Database connect error!<br/>' . $exception->getMessage(), $exception->getCode());
+            throw new DoitException('Database connect error!<br>' . $exception->getMessage(), $exception->getCode());
         }
 
         //设置数据编码
@@ -514,7 +514,7 @@ class DbPdo {
         }
 
         //抛出异常信息
-        throw new DoitException("SQL execute error!<br/>SQL:{$sql} " . $exception->getMessage());
+        throw new DoitException("SQL execute error!<br>SQL:{$sql} " . $exception->getMessage());
     }
 
     /**

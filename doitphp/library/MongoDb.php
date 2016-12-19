@@ -94,7 +94,7 @@ class MongoDb {
         } catch (Exception $exception) {
 
             //抛出异常信息
-            throw new DoitException('MongoDb connect error!<br/>' . $exception->getMessage(), $exception->getCode());
+            throw new DoitException('MongoDb connect error!<br>' . $exception->getMessage(), $exception->getCode());
         }
     }
 

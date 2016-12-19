@@ -57,7 +57,7 @@ class Ftp {
         } catch (Exception $exception) {
 
             //抛出异常信息
-            throw new DoitException('Ftp server connect error!<br/>' . $exception->getMessage(), $exception->getCode());
+            throw new DoitException('Ftp server connect error!<br>' . $exception->getMessage(), $exception->getCode());
         }
     }
 

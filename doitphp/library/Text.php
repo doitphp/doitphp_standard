@@ -159,7 +159,7 @@ class Text {
             $str = str_replace(array('<font ', '</font>'), array('<span ', '</span>'), $str);
             $str = preg_replace('#color="(.*?)"#', 'style="color: \\1"', $str);
         }
-        $str = preg_replace("#\<code\>.+?//tempstart\<br />\</span\>#is", "<code>\n", $str);
+        $str = preg_replace("#\<code\>.+?//tempstart\<br>\</span\>#is", "<code>\n", $str);
         $str = preg_replace("#//tempend.+#is", "</span>\n</code>", $str);
         $str = str_replace(array('phptagopen', 'phptagclose', 'backslashtmp'), array('&lt;?php', '?&gt;', '\\'), $str);
 
@@ -311,7 +311,7 @@ class Text {
           "self::highlight_code('\\1')",
           "self::highlight_code('\\1')",
           "<div class='sign'>\\1</div>",
-          "<br/>",
+          "<br>",
           );
 
           $Text=preg_replace($source_array, $replaceArray,$Text);
