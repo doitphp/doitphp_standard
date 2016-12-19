@@ -24,22 +24,22 @@ class File {
      *
      * @access public
      *
-     * @param string $dirName 目标目录
+     * @param string $dirPath 目标目录
      * @param string $mod 权限值
      *
      * @return boolean
      */
-    public static function makeDir($dirName, $mode = 0755) {
+    public static function makeDir($dirPath, $mode = 0755) {
 
         //参数分析
-        if (!$dirName) {
+        if (!$dirPath) {
             return false;
         }
 
-        if (is_dir($dirName)) {
+        if (is_dir($dirPath)) {
             return true;
         }
-        mkdir($dirName, $mode, true);
+        mkdir($dirPath, $mode, true);
 
         return true;
     }
@@ -49,21 +49,21 @@ class File {
      *
      * @access public
      *
-     * @param string $dirName 所要读取内容的目录名
+     * @param string $dirPath 所要读取内容的目录名
      *
      * @return string
      */
-    public static function readDir($dirName) {
+    public static function readDir($dirPath) {
 
         //参数分析
-        if (!$dirName) {
+        if (!$dirPath) {
             return false;
         }
 
         //define filter file name
         $filterArray = array('.cvs', '.svn', '.git');
 
-        $dir    = self::_parseDir($dirName);
+        $dir    = self::_parseDir($dirPath);
         $handle = opendir($dir);
 
         $files  = array();
@@ -154,21 +154,21 @@ class File {
      *
      * @access public
      *
-     * @param string $fileDir 所要删除文件的路径
+     * @param string $dirPath 所要删除文件的路径
      *
      * @return boolean
      */
-    public static function deleteDir($fileDir) {
+    public static function deleteDir($dirPath) {
 
         //参数分析
-        if (!$fileDir){
+        if (!$dirPath){
             return false;
         }
 
         //清空子目录及内部文件
-        self::clearDir($fileDir);
+        self::clearDir($dirPath);
 
-        rmdir($fileDir);
+        rmdir($dirPath);
 
         return true;
     }
@@ -178,19 +178,19 @@ class File {
      *
      * @access public
      *
-     * @param string $dirName 所要清空内容的文件夹名称
+     * @param string $dirPath 所要清空内容的文件夹名称
      * @param boolean $option 是否删除子目录, 注：当为false时,只删除子目录中的文件,目录不会删除
      *
      * @return boolean
      */
-    public static function clearDir($dirName, $option = true) {
+    public static function clearDir($dirPath, $option = true) {
 
         //参数分析
-        if (!$dirName){
+        if (!$dirPath){
             return false;
         }
 
-        $parseDir = self::_parseDir($dirName);
+        $parseDir = self::_parseDir($dirPath);
         $fileList = self::readDir($parseDir);
 
         foreach ($fileList as $file) {
@@ -212,27 +212,27 @@ class File {
      *
      * @access protected
      *
-     * @param string $dirName 所要操作的文件目录名
-     * @param boolean $isMkdir 是否创建目录
+     * @param string $dirPath 所要操作的文件目录名
+     * @param boolean $isMkdirStatus 是否创建目录
      *
      * @return string
      */
-    protected static function _parseDir($dirName, $isMkdir = false) {
+    protected static function _parseDir($dirPath, $isMkdirStatus = false) {
 
         //参数分析
-        if (!$dirName) {
+        if (!$dirPath) {
             return false;
         }
 
-        if ($isMkdir === true) {
-            self::makeDir($dirName, 0755);
+        if ($isMkdirStatus === true) {
+            self::makeDir($dirPath, 0755);
         } else {
-            if (!is_dir($dirName)) {
-                Response::halt('The dir: ' . $dirName . ' is not found!');
+            if (!is_dir($dirPath)) {
+                Response::halt('The dir: ' . $dirPath . ' is not found!');
             }
         }
 
-        return $dirName;
+        return $dirPath;
     }
 
     /**
@@ -240,22 +240,22 @@ class File {
      *
      * @access public
      *
-     * @param string $fileName 文件路径
+     * @param string $filePath 文件路径
      * @param string $content 文件内容
      *
      * @return boolean
      */
-    public static function writeFile($fileName, $content = '') {
+    public static function writeFile($filePath, $content = '') {
 
         //参数分析
-        if (!$fileName) {
+        if (!$filePath) {
             return false;
         }
 
         //分析文件目录
-        self::_parseDir(dirname($fileName), true);
+        self::_parseDir(dirname($filePath), true);
 
-        return file_put_contents($fileName, $content, LOCK_EX);
+        return file_put_contents($filePath, $content, LOCK_EX);
     }
 
     /**
@@ -315,23 +315,23 @@ class File {
      *
      * @access public
      *
-     * @param string $fileName 文件路径
+     * @param string $filePath 文件路径
      *
      * @return boolean
      */
-    public static function deleteFile($fileName) {
+    public static function deleteFile($filePath) {
 
         //参数分析
-        if (!$fileName) {
+        if (!$filePath) {
             return false;
         }
 
         //文件分析
-        if (!is_file($fileName)) {
+        if (!is_file($filePath)) {
             return true;
         }
 
-        return unlink($fileName);
+        return unlink($filePath);
     }
 
     /**
