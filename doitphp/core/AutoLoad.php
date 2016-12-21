@@ -53,7 +53,7 @@ abstract class AutoLoad {
     'Security'          => 'library/Security.php',
     'Text'              => 'library/Text.php',
     'Encrypt'           => 'library/Encrypt.php',
-    'Zip'               => 'library/Zip.php',
+    'Tree'              => 'library/Tree.php',
     'MongoDb'           => 'library/MongoDb.php',
     'Language'          => 'library/Language.php',
     'Cache_Memcached'   => 'library/cache/Memcached.php',
