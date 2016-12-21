@@ -641,12 +641,12 @@ class Template {
 
         //参数分析
         if (!$fileName) {
-            return Doit::getControllerName() . DS . Doit::getActionName();
+            return str_replace('_', DS, Doit::getControllerName()) . DS . Doit::getActionName();
         }
 
         $fileName = str_replace('.', '/', $fileName);
         if (strpos($fileName, '/') === false) {
-            $fileName = Doit::getControllerName() . DS . $fileName;
+            $fileName = str_replace('_', DS, Doit::getControllerName()) . DS . $fileName;
         }
 
         return $fileName;
@@ -710,7 +710,7 @@ class Template {
      */
     protected function _parseCacheFile($cacheId) {
 
-        return CACHE_PATH . '/htmls/' . Doit::getControllerName() . DS . md5($cacheId) . '.action.html';
+        return CACHE_PATH . '/htmls/' . str_replace('_', DS, Doit::getControllerName()) . DS . md5($cacheId) . '.action.html';
     }
 
     /**

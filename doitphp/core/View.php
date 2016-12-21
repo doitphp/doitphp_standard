@@ -266,10 +266,10 @@ class View {
 
         //参数分析
         if (!$fileName) {
-            $viewFileName = Doit::getControllerName() . DS . Doit::getActionName();
+            $viewFileName = str_replace('_', DS, Doit::getControllerName()) . DS . Doit::getActionName();
         } else {
             $fileName     = str_replace('.', '/', $fileName);
-            $viewFileName = ((strpos($fileName, '/') === false) ? Doit::getControllerName() . DS : '') . $fileName;
+            $viewFileName = ((strpos($fileName, '/') === false) ? str_replace('_', DS, Doit::getControllerName()) . DS : '') . $fileName;
         }
 
         $viewPath = $this->_viewPath . DS . $viewFileName . VIEW_EXT;
@@ -464,7 +464,7 @@ class View {
      */
     protected function _parseCacheFile($cacheId) {
 
-        return CACHE_PATH . '/htmls/' . Doit::getControllerName() . DS . md5($cacheId) . '.action.html';
+        return CACHE_PATH . '/htmls/' . str_replace('_', DS, Doit::getControllerName()) . DS . md5($cacheId) . '.action.html';
     }
 
     /**
