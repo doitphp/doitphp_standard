@@ -22,24 +22,24 @@ class Text {
      *
      * @access public
      *
-     * @param string $str 需要转换的字符串
+     * @param string $string 需要转换的字符串
      * @param string $start 开始位置
      * @param string $length 截取长度
      * @param string $charset 编码格式
      *
      * @return string
      */
-    public static function substr($str, $start = 0, $length, $charset = "UTF8") {
+    public static function substr($string, $start = 0, $length, $charset = "UTF8") {
 
         //参数分析
-        if (!$str) {
-            return $str;
+        if (!$string) {
+            return $string;
         }
 
         if(function_exists("mb_substr"))
-            return mb_substr($str, $start, $length, $charset);
+            return mb_substr($string, $start, $length, $charset);
         elseif(function_exists('iconv_substr')) {
-            return iconv_substr($str, $start, $length, $charset);
+            return iconv_substr($string, $start, $length, $charset);
         }
 
         $re['utf-8']  = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf]{2}|[\xf0-\xff][\x80-\xbf]{3}/";
@@ -47,7 +47,7 @@ class Text {
         $re['gbk']    = "/[\x01-\x7f]|[\x81-\xfe][\x40-\xfe]/";
         $re['big5']   = "/[\x01-\x7f]|[\x81-\xfe]([\x40-\x7e]|\xa1-\xfe])/";
 
-        preg_match_all($re[$charset], $str, $match);
+        preg_match_all($re[$charset], $string, $match);
         $slice = implode("", array_slice($match[0], $start, $length));
 
         return $slice;
@@ -140,30 +140,30 @@ class Text {
      * @copyright DooPHP
      * @author Leng Sheng Hong <darkredz@gmail.com>
      *
-     * @param string $str 代码内容
+     * @param string $string 代码内容
      *
      * @return string
      */
-    public static function highlightCode($str){
+    public static function highlightCode($string){
 
         //parse params
-        if (!$str) {
+        if (!$string) {
             return false;
         }
 
-        $str = str_replace(array('&lt;', '&gt;'), array('<', '>'), $str);
-        $str = str_replace(array('&lt;?php', '?&gt;',  '\\'), array('phptagopen', 'phptagclose', 'backslashtmp'), $str);
-        $str = '<?php //tempstart' . "\n" . $str . '//tempend ?>';
-        $str = highlight_string($str, true);
+        $string = str_replace(array('&lt;', '&gt;'), array('<', '>'), $string);
+        $string = str_replace(array('&lt;?php', '?&gt;',  '\\'), array('phptagopen', 'phptagclose', 'backslashtmp'), $string);
+        $string = '<?php //tempstart' . "\n" . $string . '//tempend ?>';
+        $string = highlight_string($string, true);
         if(abs(phpversion()) < 5){
-            $str = str_replace(array('<font ', '</font>'), array('<span ', '</span>'), $str);
-            $str = preg_replace('#color="(.*?)"#', 'style="color: \\1"', $str);
+            $string = str_replace(array('<font ', '</font>'), array('<span ', '</span>'), $string);
+            $string = preg_replace('#color="(.*?)"#', 'style="color: \\1"', $string);
         }
-        $str = preg_replace("#\<code\>.+?//tempstart\<br>\</span\>#is", "<code>\n", $str);
-        $str = preg_replace("#//tempend.+#is", "</span>\n</code>", $str);
-        $str = str_replace(array('phptagopen', 'phptagclose', 'backslashtmp'), array('&lt;?php', '?&gt;', '\\'), $str);
+        $string = preg_replace("#\<code\>.+?//tempstart\<br>\</span\>#is", "<code>\n", $string);
+        $string = preg_replace("#//tempend.+#is", "</span>\n</code>", $string);
+        $string = str_replace(array('phptagopen', 'phptagclose', 'backslashtmp'), array('&lt;?php', '?&gt;', '\\'), $string);
 
-        return $str;
+        return $string;
     }
 
     /**
