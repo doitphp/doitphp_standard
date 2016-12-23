@@ -20,37 +20,37 @@ if (!defined('IN_DOIT')) {
 class Validation {
 
     /**
-     * 正则表达式验证email格式
+     * 使用正则表达式验证是否为email格式
      *
-     * @param string $str    所要验证的邮箱地址
+     * @param string $string    所要验证的邮箱地址
      * @return boolean
      */
-    public static function isEmail($str) {
+    public static function isEmail($string) {
 
-        if (!$str) {
+        if (!$string) {
             return false;
         }
 
-        return preg_match('#[a-z0-9&\-_.]+@[\w\-_]+([\w\-.]+)?\.[\w\-]+#is', $str) ? true : false;
+        return preg_match('#[a-z0-9&\-_.]+@[\w\-_]+([\w\-.]+)?\.[\w\-]+#is', $string) ? true : false;
     }
 
     /**
-     * 正则表达式验证网址
+     * 使用正则表达式验证是否为网址格式
      *
-     * @param string $str    所要验证的网址
+     * @param string $string    所要验证的网址
      * @return boolean
      */
-    public static function isUrl($str) {
+    public static function isUrl($string) {
 
-        if (!$str) {
+        if (!$string) {
             return false;
         }
 
-        return preg_match('#(http|https|ftp|ftps)://([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?#i', $str) ? true : false;
+        return preg_match('#(http|https|ftp|ftps)://([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?#i', $string) ? true : false;
     }
 
     /**
-     * 验证字符串中是否含有汉字
+     * 使用正则表达式验证字符串中是否含有汉字
      *
      * @param integer $string    所要验证的字符串。注：字符串编码仅支持UTF-8
      * @return boolean
@@ -65,7 +65,7 @@ class Validation {
     }
 
     /**
-     * 验证字符串中是否含有非法字符
+     * 使用正则表达式验证字符串中是否含有非法字符
      *
      * @param string $string    待验证的字符串
      * @return boolean
@@ -80,7 +80,7 @@ class Validation {
     }
 
     /**
-     * 用正则表达式验证邮证编码
+     * 使用用正则表达式验证是否为邮证编码
      *
      * @param integer $num    所要验证的邮政编码
      * @return boolean
@@ -95,7 +95,7 @@ class Validation {
     }
 
     /**
-     * 正则表达式验证身份证号码
+     * 使用正则表达式验证是滞为身份证号码(中国大陆区)
      *
      * @param integer $num    所要验证的身份证号码
      * @return boolean
@@ -110,29 +110,29 @@ class Validation {
     }
 
     /**
-     * 正则表达式验证IP地址, 注:仅限IPv4
+     * 使用正则表达式验证是否为IP地址(IPv4).
      *
-     * @param string $str    所要验证的IP地址
+     * @param string $string    所要验证的IP地址
      * @return boolean
      */
-    public static function isIp($str) {
+    public static function isIPv4($string) {
 
-        if (!$str) {
+        if (!$string) {
             return false;
         }
 
-        if (!preg_match('#^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$#', $str)) {
+        if (!preg_match('#^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$#', $string)) {
             return false;
         }
 
-        $ipArray = explode('.', $str);
+        $ipArray = explode('.', $string);
 
         //真实的ip地址每个数字不能大于255（0-255）
         return ($ipArray[0]<=255 && $ipArray[1]<=255 && $ipArray[2]<=255 && $ipArray[3]<=255) ? true : false;
     }
 
     /**
-     * 用正则表达式验证出版物的ISBN号
+     * 使用正则表达式验证是否为出版物的ISBN号
      *
      * @param integer $str    所要验证的ISBN号,通常是由13位数字构成
      * @return boolean
@@ -147,7 +147,7 @@ class Validation {
     }
 
     /**
-     * 用正则表达式验证手机号码(中国大陆区)
+     * 使用正则表达式验证手机号码(中国大陆区)
      * @param integer $num    所要验证的手机号
      * @return boolean
      */
@@ -157,24 +157,7 @@ class Validation {
             return false;
         }
 
-        return preg_match('#^13[\d]{9}$|14^[0-9]\d{8}|^15[0-9]\d{8}$|^18[0-9]\d{8}$#', $num) ? true : false;
-    }
-
-    /**
-     * 检查字符串是否为空
-     *
-     * @access public
-     * @param string $string 字符串内容
-     * @return boolean
-     */
-    public static function isMust($string = null) {
-
-        //参数分析
-        if (is_null($string)) {
-            return false;
-        }
-
-        return is_null($string) ? false : true;
+        return preg_match('#^13[\d]{9}$|14^[0-9]\d{8}|^15[0-9]\d{8}$|^17[0-9]\d{8}$|^18[0-9]\d{8}$#', $num) ? true : false;
     }
 
     /**
