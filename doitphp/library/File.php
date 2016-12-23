@@ -25,7 +25,7 @@ class File {
      * @access public
      *
      * @param string $dirPath 目标目录
-     * @param string $mod 权限值
+     * @param string $mod 权限值，默认:0755
      *
      * @return boolean
      */
