@@ -72,16 +72,16 @@ class Cache_Redis {
         //连接数据库
         $this->_Redis  = new Redis();
         $connect = (!$options['persistent']) ? 'connect' : 'pconnect';
-        $return = $this->_Redis->$connect($options['host'], $options['port'], $options['expire']);
+        $linkId  = $this->_Redis->$connect($options['host'], $options['port'], $options['expire']);
 
-        if ($return && $options['password']) {
-            $return = $this->_Redis->auth($options['password']);
+        if ($linkId && $options['password']) {
+            $linkId = $this->_Redis->auth($options['password']);
         }
-        if ($return && $options['database']) {
-            $return = $this->_Redis->select($options['database']);
+        if ($linkId && $options['database']) {
+            $linkId = $this->_Redis->select($options['database']);
         }
 
-        return $return;
+        return $linkId;
     }
 
     /**
