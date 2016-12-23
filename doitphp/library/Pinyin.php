@@ -474,11 +474,11 @@ class Pinyin {
      * @access public
      *
      * @param string $string 所要转化拼音的汉字
-     * @param boolean $utf8 汉字编码是否为utf8
+     * @param boolean $isUtf8 汉字编码是否为utf8
      *
      * @return string
      */
-    public function output($string, $utf8 = true){
+    public function output($string, $isUtf8 = true){
 
         //参数分析
         if (!$string) {
@@ -486,7 +486,7 @@ class Pinyin {
         }
 
         //编码转换.
-        $string = ($utf8 == true) ? iconv('utf-8', 'gbk', $string) : $string;
+        $string = ($isUtf8 == true) ? iconv('utf-8', 'gbk', $string) : $string;
         $num = strlen($string);
 
         $pinyin = '';
@@ -500,7 +500,7 @@ class Pinyin {
         }
 
         //输出的拼音编码转换.
-        return ($utf8==true) ? iconv('gbk', 'utf-8', $pinyin) : $pinyin;
+        return ($isUtf8==true) ? iconv('gbk', 'utf-8', $pinyin) : $pinyin;
     }
 
     /**

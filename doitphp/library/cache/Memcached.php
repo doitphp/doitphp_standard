@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2015 Tommy Software Studio
  * @link http://www.doitphp.com
  * @license New BSD License.{@link http://www.opensource.org/licenses/bsd-license.php}
- * @version $Id: Cache_Memcachedd.php 2.0 2015-04-01 15:00:01Z tommy $
+ * @version $Id: Cache_Memcached.php 2.0 2015-04-01 15:00:01Z tommy $
  * @package cache
  * @since 1.0
  */
@@ -36,11 +36,11 @@ if (!defined('IN_DOIT')) {
  * 实例化
  *
  * 法一:
- * $memcached = new Cache_Memcachedd($memOptions);
+ * $memcached = new Cache_Memcached($memOptions);
  *
  */
 
-class Cache_Memcachedd {
+class Cache_Memcached {
 
     /**
      * 单例模式实例化本类
