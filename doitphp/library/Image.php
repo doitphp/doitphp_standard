@@ -24,7 +24,7 @@ class Image {
      *
      * @var string
      */
-    protected $_imageUrl;
+    protected $_imagePath;
 
     /**
      * 字体名称
@@ -280,7 +280,7 @@ class Image {
     }
 
     /**
-     * 水印图片的URL.
+     * 水印图片的路径.
      *
      * @access public
      *
@@ -288,10 +288,10 @@ class Image {
      *
      * @return object
      */
-    public function setImageUrl($url) {
+    public function setWatermarkImage($imagePath) {
 
-        if ($url) {
-            $this->_imageUrl = $url;
+        if ($imagePath) {
+            $this->_imagePath = $imagePath;
         }
 
         return $this;
@@ -489,7 +489,7 @@ class Image {
      *
      * @return boolean
      */
-    public function makeLimitImage($url, $distName = null) {
+    public function makeThumbnail($url, $distName = null) {
 
         //参数分析
         if (!$url) {
@@ -646,26 +646,26 @@ class Image {
 
         if ($this->_image && !$this->_waterImage) {
 
-            $waterUrl = (!$this->_imageUrl) ? DOIT_ROOT . '/views/source/watermark' . '.' . $this->_type : $this->_imageUrl;
+            $imagePath = (!$this->_imagePath) ? DOIT_ROOT . '/views/source/watermark' . '.' . $this->_type : $this->_imagePath;
 
-            list($this->_waterWidth, $this->_waterHeight, $type) = getimagesize($waterUrl);
+            list($this->_waterWidth, $this->_waterHeight, $type) = getimagesize($imagePath);
 
             switch ($type) {
 
                 case 1:
-                    $this->_waterImage = imagecreatefromgif ($waterUrl);
+                    $this->_waterImage = imagecreatefromgif ($imagePath);
                     break;
 
                 case 2:
-                    $this->_waterImage = imagecreatefromjpeg($waterUrl);
+                    $this->_waterImage = imagecreatefromjpeg($imagePath);
                     break;
 
                 case 3:
-                    $this->_waterImage = imagecreatefrompng($waterUrl);
+                    $this->_waterImage = imagecreatefrompng($imagePath);
                     break;
 
                 case 4:
-                    $this->_waterImage = imagecreatefromwbmp($waterUrl);
+                    $this->_waterImage = imagecreatefromwbmp($imagePath);
                     break;
             }
         }
