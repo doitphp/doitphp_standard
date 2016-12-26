@@ -93,9 +93,13 @@ if (!defined('IN_DOIT')) {
  * );
  * 注：prefix为数据表前缀。当没有前缀时，此参数可以省略。charset为数库编码。默认值为：utf8。如编码为utf8时，此参数也可以省略。
  */
-//$config['db']['dsn'] = 'mysql:host=yourHost;dbname=yourDbname';
-//$config['db']['username'] = 'yourUsername';
-//$config['db']['password'] = 'yourPassword';
+/*$config['db'] = array(
+   'dsn'      => 'mysql:host=localhost;dbname=yourDbname',
+   'username' => 'yourUsername',
+   'password' => 'yourPassword',
+   'prefix'   => '',
+   'charset'  => 'utf8',
+);*/
 
 /**
  * 设置Cookie生存周期

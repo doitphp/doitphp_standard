@@ -4,7 +4,7 @@
  *
  * @author tommy <streen003@gmail.com>
  * @copyright Copyright (C) 2009-2012 www.doitphp.com All rights reserved.
- * @version $Id: index.php 1.0 2014-09-18 01:14:18Z tommy $
+ * @version $Id: index.php 2.5 2016-12-27 01:14:18Z tommy $
  * @package application
  * @since 1.0
  */
@@ -21,9 +21,9 @@ define('APP_ROOT', dirname(__FILE__));
  */
 require_once APP_ROOT . '/doitphp/DoitPHP.php';
 
-$config = APP_ROOT . '/application/config/application.php';
+$configFile = APP_ROOT . '/application/config/application.php';
 
 /**
  * 启动应用程序(网站)进程
  */
-Doit::run($config);
+Doit::run($configFile);
