@@ -27,4 +27,5 @@ DoitPHP 标准版 V2.5
 官方网址：
 ------------
 如果想获取更多关于DoitPHP的信息，或查看使用文档请访问官方网址。
+	
 	http://www.doitphp.com/
