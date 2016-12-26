@@ -101,12 +101,13 @@ if (!defined('IN_DOIT')) {
    'charset'  => 'utf8',
 );*/
 
-/**
- * 设置Cookie生存周期
- */
- //$config['cookie']['expire'] = 3600;
 
- /**
- * 设置Session生存周期
- */
- //$config['session']['expire'] = 3600;
+/**
+* 设置Cookie生存周期
+*/
+//$config['cookie']['expire'] = 3600;
+
+/**
+* 设置Session生存周期
+*/
+//$config['session']['expire'] = 3600;
