@@ -705,7 +705,7 @@ abstract class Controller {
      *
      * @return mixed
      */
-    protected static function _stripSlashes($data = array()) {
+    protected function _stripSlashes($data = array()) {
 
         //参数分析
         if (!$data) {
