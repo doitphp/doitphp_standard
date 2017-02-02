@@ -536,6 +536,11 @@ class Model {
             return false;
         }
 
+        if (!is_null($params) && !is_array($params)) {
+            $params = func_get_args();
+            array_shift($params);
+        }
+
         //转义数据表前缀
         $sql = str_replace('#__', $this->_prefix, $sql);
 
@@ -559,6 +564,11 @@ class Model {
         //参数分析
         if (!$sql) {
             return false;
+        }
+
+        if (!is_null($params) && !is_array($params)) {
+            $params = func_get_args();
+            array_shift($params);
         }
 
         //转义数据表前缀
@@ -649,6 +659,10 @@ class Model {
         }
 
         //分析执行条件
+        if (!is_null($value) && !is_array($value)) {
+            $value = func_get_args();
+            $value = array_slice($value, 2);
+        }
         $condition   = $this->_parseCondition($where, $value);
         if ($condition['where']) {
             $condition['where'] = ltrim($condition['where'], 'WHERE ');
@@ -679,6 +693,10 @@ class Model {
     public function delete($where = null, $value = null) {
 
         //分析执行条件
+        if (!is_null($value) && !is_array($value)) {
+            $value = func_get_args();
+            array_shift($value);
+        }
         $condition = $this->_parseCondition($where, $value);
         if ($condition['where']) {
             $condition['where'] = ltrim($condition['where'], 'WHERE ');
@@ -696,13 +714,10 @@ class Model {
      * 注：默认主键为数据表的物理主键
      *
      * @access public
-     *
      * @param mixed $id 所要查询的主键值。注：本参数可以为数组。当为数组时，返回多行数据
-     * @param array $fields 返回数据的有效字段(数据表字段)
-     *
      * @return array
      */
-    public function find($id, $fields = null) {
+    public function find($id) {
 
         //参数分析
         if (!$id) {
@@ -710,7 +725,7 @@ class Model {
         }
 
         //分析字段信息
-        $fields = $this->_parseFields($fields);
+        $fields = $this->_parseFields();
 
         //获取当前数据表的名称及主键信息
         $tableName  = $this->getTableName();
@@ -736,31 +751,25 @@ class Model {
      * 以主键为中心排序，获取数据表全部数据信息。注:如果数据表数据量较大时，慎用此函数（类方法），以免数据表数据量过大，造成数据库服务器内存溢出,甚至服务器宕机
      *
      * @access public
-     *
-     * @param array $fields 返回的数据表字段,默认为全部.即SELECT * FROM tableName
-     * @param mixed $orderDesc 排序条件
-     * @param integer $limitStart limit启起ID
-     * @param integer $listNum 显示的行数
-     *
      * @return array
      */
-    public function findAll($fields = null, $orderDesc = null, $limitStart = null, $listNum = null) {
+    public function findAll() {
 
         //分析数据表字段
-        $fields = $this->_parseFields($fields);
+        $fields = $this->_parseFields();
 
         //获取当前 的数据表名及主键名
         $tableName  = $this->getTableName();
 
         //分析数据的排序
-        $orderString = $this->_parseOrder($orderDesc);
+        $orderString = $this->_parseOrder();
         if (!$orderString) {
             $primaryKey =$this->_getPrimaryKey();
             $orderString = "ORDER BY {$primaryKey} ASC";
         }
 
         //分析SQL语句limit片段
-        $limitString = $this->_parseLimit($limitStart, $listNum);
+        $limitString = $this->_parseLimit();
 
         $sql = "SELECT {$fields} FROM {$tableName} {$orderString} {$limitString}";
 
@@ -776,18 +785,20 @@ class Model {
      *
      * @param mixed $where 查询条件
      * @param mixed $value 待转义的数值
-     * @param mixed $fields 返回数据的数据表的有效字段，默认为全部字段。
-     * @param mixed $orderDesc 排序条件
      *
      * @return array
      */
-    public function getOne($where = null, $value = null, $fields = null, $orderDesc = null) {
+    public function getOne($where = null, $value = null) {
 
         //分析查询条件
+        if (!is_null($value) && !is_array($value)) {
+            $value = func_get_args();
+            array_shift($value);
+        }
         $condition = $this->_parseCondition($where, $value);
 
         //分析所要查询的字段
-        $fields    = $this->_parseFields($fields);
+        $fields    = $this->_parseFields();
 
         //获取当前的数据表
         $tableName = $this->getTableName();
@@ -798,7 +809,7 @@ class Model {
         }
 
         //分析数据的排序
-        $orderString = $this->_parseOrder($orderDesc);
+        $orderString = $this->_parseOrder();
         if ($orderString) {
             $sql .= ' ' . $orderString;
         }
@@ -822,16 +833,20 @@ class Model {
      *
      * @return array
      */
-    public function getAll($where = null, $value = null, $fields = null, $orderDesc = null, $limitStart = null, $listNum = null) {
+    public function getAll($where = null, $value = null) {
 
         //分析查询条件
+        if (!is_null($value) && !is_array($value)) {
+            $value = func_get_args();
+            array_shift($value);
+        }
         $condition   = $this->_parseCondition($where, $value);
 
         //获取当前的数据表
         $tableName   = $this->getTableName();
 
         //分析所要查询的字段
-        $fields      = $this->_parseFields($fields);
+        $fields      = $this->_parseFields();
 
         //组装SQL语句
         $sql = "SELECT {$fields} FROM {$tableName}";
@@ -840,13 +855,13 @@ class Model {
         }
 
         //分析数据的排序
-        $orderString = $this->_parseOrder($orderDesc);
+        $orderString = $this->_parseOrder();
         if ($orderString) {
             $sql .= ' ' . $orderString;
         }
 
         //分析数据的显示行数
-        $limitString = $this->_parseLimit($limitStart, $listNum);
+        $limitString = $this->_parseLimit();
         if ($limitString) {
             $sql .= ' ' . $limitString;
         }
@@ -1113,6 +1128,12 @@ class Model {
      */
     public function count($fieldName = null, $where = null, $value = null) {
 
+        //参数分析
+        if (!is_null($value) && !is_array($value)) {
+            $value = func_get_args();
+            $value = array_slice($value, 2);
+        }
+
         return $this->_getValueByFunction('count', $fieldName, $where, $value);
     }
 
@@ -1141,6 +1162,10 @@ class Model {
         }
 
         //分析判断条件
+        if (!is_null($value) && !is_array($value)) {
+            $value = func_get_args();
+            $value = array_slice($value, 2);
+        }
         $condition  = $this->_parseCondition($where, $value);
 
         //获取当前的数据表名
@@ -1164,6 +1189,12 @@ class Model {
      */
     public function max($fieldName = null, $where = null, $value = null) {
 
+        //参数分析
+        if (!is_null($value) && !is_array($value)) {
+            $value = func_get_args();
+            $value = array_slice($value, 2);
+        }
+
         return $this->_getValueByFunction('max', $fieldName, $where, $value);
     }
 
@@ -1179,6 +1210,12 @@ class Model {
      * @return integer
      */
     public function min($fieldName = null, $where = null, $value = null) {
+
+        //参数分析
+        if (!is_null($value) && !is_array($value)) {
+            $value = func_get_args();
+            $value = array_slice($value, 2);
+        }
 
         return $this->_getValueByFunction('min', $fieldName, $where, $value);
     }
@@ -1196,6 +1233,12 @@ class Model {
      */
     public function sum($fieldName = null, $where = null, $value = null) {
 
+        //参数分析
+        if (!is_null($value) && !is_array($value)) {
+            $value = func_get_args();
+            $value = array_slice($value, 2);
+        }
+
         return $this->_getValueByFunction('sum', $fieldName, $where, $value);
     }
 
@@ -1211,6 +1254,12 @@ class Model {
      * @return integer
      */
     public function avg($fieldName = null, $where = null, $value = null) {
+
+        //参数分析
+        if (!is_null($value) && !is_array($value)) {
+            $value = func_get_args();
+            $value = array_slice($value, 2);
+        }
 
         return $this->_getValueByFunction('avg', $fieldName, $where, $value);
     }
