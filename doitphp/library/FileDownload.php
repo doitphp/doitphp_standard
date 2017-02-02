@@ -25,7 +25,7 @@ class FileDownload {
      *
      * @return void
      */
-    public static function render($filePath, $rename = null) {
+    public static function getData($filePath, $rename = null) {
 
         //参数分析
         if(!$filePath) {

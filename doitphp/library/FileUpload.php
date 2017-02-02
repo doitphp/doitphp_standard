@@ -51,7 +51,7 @@ class FileUpload {
      *
      * @return boolean
      */
-    public function render($files, $destFile) {
+    public function moveFile($files, $destFile) {
 
         //参数分析
         if (!$files || !$destFile) {
