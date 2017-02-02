@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2010 Tommy Software Studio
  * @link http://www.doitphp.com
  * @license New BSD License.{@link http://www.opensource.org/licenses/bsd-license.php}
- * @version $Id: Pagination.php 2.0 2012-12-29 11:40:01Z tommy $
+ * @version $Id: Pagination.php 2.6 2012-12-29 11:40:01Z tommy $
  * @package library
  * @since 1.0
  */
@@ -18,25 +18,25 @@ if (!defined('IN_DOIT')) {
 class Pagination {
 
     /**
-     * 连接网址
+     * 分页链接网址
      *
      * @var string
      */
-    protected $_url = null;
+    protected $_baseUrl = null;
 
     /**
      * 当前页
      *
      * @var integer
      */
-    protected $_page = 1;
+    protected $_currentPage = 1;
 
     /**
      * list总数
      *
      * @var integer
      */
-    protected $_total = 0;
+    protected $_totalItems = 0;
 
     /**
      * 分页总数
@@ -50,28 +50,21 @@ class Pagination {
      *
      * @var integer
      */
-    protected $_num = 10;
+    protected $_perPageItems = 10;
 
     /**
-     * list允许放页码数量,如:1.2.3.4就这4个数字,则$perCircle为4
+     * list允许放页码数量,如:1.2.3.4就这4个数字,则$_perCircleLimit为4
      *
      * @var integer
      */
-    protected $_perCircle = 10;
+    protected $_perCircleLimit = 10;
 
     /**
-     * list中的坐标. 如:7,8,九,10,11这里的九为当前页,在list中排第三位,则$center为3
+     * list中的坐标. 如:7,8,九,10,11这里的九为当前页,在list中排第三位,则$_circleCenterCount为3
      *
      * @var integer
      */
-    protected $_center = 3;
-
-    /**
-     * 分页css名
-     *
-     * @var string
-     */
-    protected $_styleFile = null;
+    protected $_circleCenterCount = 3;
 
     /**
      * 分页隐藏开关
@@ -116,7 +109,7 @@ class Pagination {
      */
     protected function _getTotalPage() {
 
-        return ceil($this->_total / $this->_num);
+        return ceil($this->_totalItems / $this->_perPageItems);
     }
 
     /**
@@ -125,10 +118,10 @@ class Pagination {
      * @access protected
      * @return integer
      */
-    protected function _getPageNum() {
+    protected function _parseCurrentPage() {
 
         //当URL中?page=5的page参数大于总页数时
-        return ($this->_page > $this->_totalPages) ? $this->_totalPages : $this->_page;
+        return ($this->_currentPage > $this->_totalPages) ? $this->_totalPages : $this->_currentPage;
     }
 
     /**
@@ -144,7 +137,7 @@ class Pagination {
 
         //参数分析
         if ($num) {
-            $this->_num = $num;
+            $this->_perPageItems = $num;
         }
 
         return $this;
@@ -163,7 +156,7 @@ class Pagination {
 
         //参数分析
         if ($totalNum) {
-            $this->_total = $totalNum;
+            $this->_totalItems = $totalNum;
         }
 
         return $this;
@@ -192,15 +185,15 @@ class Pagination {
      *
      * @access public
      *
-     * @param string $url 分页跳转的网址
+     * @param string $baseUrl 分页跳转的网址
      *
      * @return object
      */
-    public function url($url = null) {
+    public function url($baseUrl = null) {
 
         //当网址不存在时
-        if ($url) {
-            $this->_url = trim($url);
+        if ($baseUrl) {
+            $this->_baseUrl = trim($baseUrl);
         }
 
         return $this;
@@ -211,15 +204,15 @@ class Pagination {
      *
      * @access public
      *
-     * @param integer $page 当前的页数
+     * @param integer $onPage 当前的页数
      *
      * @return object
      */
-    public function page($page = null) {
+    public function page($onPage = null) {
 
         //参数分析
-        if($page) {
-            $this->_page = $page;
+        if($onPage) {
+            $this->_currentPage = $onPage;
         }
 
         return $this;
@@ -230,15 +223,15 @@ class Pagination {
      *
      * @access public
      *
-     * @param integer $num 分页列表重心(即：页数)
+     * @param integer $countNum 分页列表重心(即：页数)
      *
      * @return object
      */
-    public function center($num) {
+    public function center($countNum) {
 
         //参数分析
-        if ($num && is_int($num)) {
-            $this->_center = $num;
+        if ($countNum && is_int($countNum)) {
+            $this->_circleCenterCount = $countNum;
         }
 
         return $this;
@@ -253,43 +246,30 @@ class Pagination {
      *
      * @return object
      */
-    public function circle($num) {
+    public function circle($limitNum) {
 
         //参数分析
-        if ($num && is_int($num)) {
-            $this->_perCircle = $num;
+        if ($limitNum && is_int($limitNum)) {
+            $this->_perCircleLimit = $limitNum;
         }
 
         return $this;
     }
 
     /**
-     * 输出分页数组
+     * 获取分页数组
      *
      * @access public
      * @return array
      */
-    public function render() {
-
-        return $this->_processData();
-    }
-
-    /**
-     * 处理分页数组
-     *
-     * @access protected
-     * @return array
-     */
-    protected function _processData() {
+    public function getArray() {
 
         //支持长的url.
-        $this->_url        = trim(str_replace(array("\n","\r"), '', $this->_url));
-
+        $this->_baseUrl     = trim(str_replace(array("\n","\r"), '', $this->_baseUrl));
         //获取总页数.
-        $this->_totalPages = $this->_getTotalPage();
-
+        $this->_totalPages  = $this->_getTotalPage();
         //获取当前页.
-        $this->_page       = $this->_getPageNum();
+        $this->_currentPage = $this->_parseCurrentPage();
 
         $data = array();
 
@@ -299,35 +279,39 @@ class Pagination {
         }
 
         //当分页隐藏功能开启时
-        if (($this->_hiddenStatus === true) && ($this->_total <= $this->_num)) {
+        if (($this->_hiddenStatus === true) && ($this->_totalItems <= $this->_perPageItems)) {
             return $data;
         }
 
-        $data['listTotalNum']   = $this->_total;
-        $data['perPageListNum'] = $this->_num;
-        $data['pageTotalNum']   = $this->_totalPages;
-        $data['page']           = $this->_page;
+        $data['num_items'] = $this->_totalItems;
+        $data['per_page']  = $this->_perPageItems;
+        $data['num_pages'] = $this->_totalPages;
+        $data['page']      = $this->_currentPage;
 
         //分析上一页
-        if ($this->_page != 1 && $this->_totalPages > 1) {
-            $data['firstPage'] = array('text'=>$this->firstPage, 'url'=>$this->_url . 1);
-            $data['prePage']   = array('text'=>$this->prePage, 'url'=>$this->_url . ($this->_page - 1));
+        $data['is_previous'] = 0;
+        if ($this->_currentPage != 1 && $this->_totalPages > 1) {
+            $data['first_page']    = array('page_number' => $this->firstPage, 'page_url' => $this->_baseUrl . 1);
+            $data['previous_page'] = array('page_number' => $this->prePage, 'page_url' => $this->_baseUrl . ($this->_currentPage - 1));
+            $data['is_previous']   = 1;
         }
 
         //分析下一页
-        if ($this->_page != $this->_totalPages && $this->_totalPages > 1) {
-            $data['nextPage'] = array('text'=>$this->nextPage, 'url'=>$this->_url . ($this->_page + 1));
-            $data['lastPage'] = array('text'=>$this->lastPage, 'url'=>$this->_url . $this->_totalPages);
+        $data['is_next'] = 0;
+        if ($this->_currentPage != $this->_totalPages && $this->_totalPages > 1) {
+            $data['next_page'] = array('page_number' => $this->nextPage, 'page_url' => $this->_baseUrl . ($this->_currentPage + 1));
+            $data['last_page'] = array('page_number' => $this->lastPage, 'page_url' => $this->_baseUrl . $this->_totalPages);
+            $data['is_next']   = 1;
         }
 
         //分析分页列表
-        if ($this->_totalPages > $this->_perCircle) {
-            if ($this->_page + $this->_perCircle >= $this->_totalPages + $this->_center) {
-                $listStart   = $this->_totalPages - $this->_perCircle + 1;
+        if ($this->_totalPages > $this->_perCircleLimit) {
+            if ($this->_currentPage + $this->_perCircleLimit >= $this->_totalPages + $this->_circleCenterCount) {
+                $listStart   = $this->_totalPages - $this->_perCircleLimit + 1;
                 $listEnd     = $this->_totalPages;
             } else {
-                $listStart   = ($this->_page>$this->_center) ? $this->_page - $this->_center + 1 : 1;
-                $listEnd     = ($this->_page>$this->_center) ? $this->_page + $this->_perCircle-$this->_center : $this->_perCircle;
+                $listStart   = ($this->_currentPage > $this->_circleCenterCount) ? $this->_currentPage - $this->_circleCenterCount + 1 : 1;
+                $listEnd     = ($this->_currentPage > $this->_circleCenterCount) ? $this->_currentPage + $this->_perCircleLimit - $this->_circleCenterCount : $this->_perCircleLimit;
             }
         } else {
             $listStart       = 1;
@@ -335,10 +319,10 @@ class Pagination {
         }
 
         for($i = $listStart; $i <= $listEnd; $i ++) {
-            $data['pageList'][$i] = array('text'=>$i, 'active'=>0, 'url'=> $this->_url . $i);
+            $data['page_list'][$i] = array('page_number' => $i, 'is_current' => 0, 'page_url' => $this->_baseUrl . $i);
             //分析当前页
-            if ($i == $this->_page) {
-                $data['pageList'][$i]['active'] = 1;
+            if ($i == $this->_currentPage) {
+                $data['page_list'][$i]['is_current'] = 1;
             }
         }
 
