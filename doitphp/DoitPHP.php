@@ -8,7 +8,7 @@
  * @link http://www.doitphp.com
  * @copyright Copyright (C) 2015 www.doitphp.com All rights reserved.
  * @license New BSD License.{@link http://www.opensource.org/licenses/bsd-license.php}
- * @version $Id: DoitPHP.php 2.5 2016-12-27 20:09:56Z tommy <tommy@doitphp.com> $
+ * @version $Id: DoitPHP.php 2.6 2017-02-02 21:15:00Z tommy <tommy@doitphp.com> $
  * @package core
  * @since 1.0
  */
