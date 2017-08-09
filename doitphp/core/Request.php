@@ -26,7 +26,7 @@ abstract class Request {
      *
      * @param string $key 所要获取$_GET的参数名称
      * @param mixed $default 默认参数, 注:只有$string不为数组时有效
-     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true：是/ false：否）
+     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true:是/ false:否）
      *
      * @return mixed
      */
@@ -61,7 +61,7 @@ abstract class Request {
      *
      * @access protected
      * @param mixted $params 待转码的字符串
-     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true：是/ false：否）
+     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true:是/ false:否）
      * @return string
      */
     protected static function _encode($params = null, $isEncode = true) {
@@ -92,7 +92,7 @@ abstract class Request {
      *
      * @param string $key 所要获取$_POST的参数名称
      * @param mixed $default 默认参数, 注:只有$string不为数组时有效
-     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true：是/ false：否）
+     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true:是/ false:否）
      *
      * @return mixed
      */
@@ -131,7 +131,7 @@ abstract class Request {
      *
      * @param string $key 所要获取的参数名称
      * @param mixed $default 默认参数, 注:只有$string不为数组时有效
-     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true：是/ false：否）
+     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true:是/ false:否）
      *
      * @return mixed
      */
@@ -155,7 +155,7 @@ abstract class Request {
      *
      * @param string $key 参数键值, 注:不支持数组
      * @param mixed $default 默认参数值
-     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true：是/ false：否）
+     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true:是/ false:否）
      *
      * @return string
      */
@@ -193,7 +193,7 @@ abstract class Request {
 
         //获取网址域名部分.
         $serverName = (!$_SERVER['HTTP_HOST']) ? $_SERVER['SERVER_NAME'] : strtolower($_SERVER['HTTP_HOST']);
-        $serverPort = ($_SERVER['SERVER_PORT'] == '80') ? '' : ':' . (int)$_SERVER['SERVER_PORT'];
+        $serverPort    = ($_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] == '443') ? '' : ':' . (int)$_SERVER['SERVER_PORT'];
 
         return (self::isSecure() ? 'https://' : 'http://') . $serverName . $serverPort;
     }
@@ -237,7 +237,7 @@ abstract class Request {
      *
      * @access private
      *
-     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true：是/ false：否）
+     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true:是/ false:否）
      *
      * @return array
      */
@@ -261,7 +261,7 @@ abstract class Request {
      *
      * @access private
      *
-     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true：是/ false：否）
+     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true:是/ false:否）
      *
      * @return array
      */
@@ -285,7 +285,7 @@ abstract class Request {
      *
      * @access private
      *
-     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true：是/ false：否）
+     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true:是/ false:否）
      *
      * @return array
      */
@@ -305,7 +305,7 @@ abstract class Request {
      *
      * @access private
      *
-     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true：是/ false：否）
+     * @param boolean $isEncode 是否对符串进行htmlspecialchars()转码（true:是/ false:否）
      *
      * @return array
      */
