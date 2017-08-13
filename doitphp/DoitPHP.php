@@ -156,7 +156,7 @@ abstract class Doit {
 
             //分析Controller子目录的情况。注:controller文件的命名中下划线'_'相当于目录的'/'。
             if (strpos($controller, '_') !== false) {
-                //当controller名中含有'_'字符时,将'_'替换为路径分割符。如："/" 或 "\"
+                //当controller名中含有'_'字符时,将'_'替换为路径分割符。如:"/" 或 "\"
                 $childDirArray = explode('_', strtolower(self::$_controller));
                 $tagFileName   = ucfirst(array_pop($childDirArray));
                 $childDirName  = implode(DS, $childDirArray);
@@ -191,7 +191,7 @@ abstract class Doit {
     /**
      * 初始化常用的全局常量
      *
-     * 定义常用的全局常量：重写模式、路由分割符、伪静态网址的后缀、基本网址
+     * 定义常用的全局常量:重写模式、路由分割符、伪静态网址的后缀、基本网址
      *
      * @access private
      *
@@ -236,12 +236,12 @@ abstract class Doit {
             define('ENTRY_SCRIPT_NAME', basename($_SERVER['SCRIPT_NAME']));
         }
 
-        //定义网址路由的分割符。注：分割符不要与其它网址参数等数据相冲突
+        //定义网址路由的分割符。注:分割符不要与其它网址参数等数据相冲突
         if (!defined('URL_SEGEMENTATION')) {
             define('URL_SEGEMENTATION', Configure::get('application.urlSegmentation'));
         }
 
-        //定义路由网址的格式。注：get/path
+        //定义路由网址的格式。注:get/path
         if (!defined('URL_FORMAT')) {
             define('URL_FORMAT', Configure::get('application.urlFormat'));
         }

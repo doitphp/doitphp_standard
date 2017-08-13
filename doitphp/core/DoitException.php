@@ -16,7 +16,7 @@ class DoitException extends Exception {
     /**
      * 异常输出
      *
-     * 注：当调试模式关闭时,异常提示信息将会写入日志
+     * 注:当调试模式关闭时,异常提示信息将会写入日志
      *
      * @access public
      * @return string

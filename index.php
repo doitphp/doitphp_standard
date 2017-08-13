@@ -2,7 +2,7 @@
 /**
  * application index
  *
- * @author tommy <streen003@gmail.com>
+ * @author tommy <tommy@doitphp.com>
  * @copyright Copyright (C) 2009-2012 www.doitphp.com All rights reserved.
  * @version $Id: index.php 2.5 2016-12-27 01:14:18Z tommy $
  * @package application

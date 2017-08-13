@@ -183,7 +183,7 @@ abstract class Request {
     /**
      * 获取当前运行程序的网址域名
      *
-     * 如：http://www.doitphp.com
+     * 如:http://www.doitphp.com
      *
      * @access public
      *

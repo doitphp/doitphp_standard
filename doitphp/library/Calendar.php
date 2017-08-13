@@ -85,7 +85,7 @@ class Calendar {
      *
      * @access public
      *
-     * @param array $days 已占用的日期。注：本参数为数组
+     * @param array $days 已占用的日期。注:本参数为数组
      *
      * @return object
      */

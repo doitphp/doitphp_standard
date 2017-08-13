@@ -48,7 +48,7 @@ abstract class Configure {
     private static $_data = array();
 
     /**
-     * 类方法：loadConfig()调用状态。如果调用则为true，反之为false。
+     * 类方法:loadConfig()调用状态。如果调用则为true，反之为false。
      *
      * @var boolean
      */
@@ -153,7 +153,7 @@ abstract class Configure {
      *
      * @access public
      *
-     * @param string $fileName 项目配置文件名。注：不含“.php”后缀。
+     * @param string $fileName 项目配置文件名。注:不含“.php”后缀。
      *
      * @return array
      */
@@ -208,7 +208,7 @@ abstract class Configure {
         //设置路由网址的重写模式是否开启
         $defaultConfig['rewrite']             = false;
 
-        //设置路由网址格式(path：为url路由格式；get:为标准普通url格式)
+        //设置路由网址格式(path:为url路由格式；get:为标准普通url格式)
         $defaultConfig['urlFormat']           = self::PATH_FORMAT;
 
         //设置路由分割符

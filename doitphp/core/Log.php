@@ -25,7 +25,7 @@ abstract class Log {
      * @access public
      *
      * @param string $message     所要写入的日志内容
-     * @param string $level       日志类型. 参数：Warning, Error, Notice
+     * @param string $level       日志类型. 参数:Warning, Error, Notice
      * @param string $logFileName 日志文件名
      *
      * @return boolean

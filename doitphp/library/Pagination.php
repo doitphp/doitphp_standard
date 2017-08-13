@@ -223,7 +223,7 @@ class Pagination {
      *
      * @access public
      *
-     * @param integer $countNum 分页列表重心(即：页数)
+     * @param integer $countNum 分页列表重心(即:页数)
      *
      * @return object
      */

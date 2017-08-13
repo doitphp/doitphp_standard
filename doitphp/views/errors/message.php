@@ -12,7 +12,7 @@ body{font-family:"Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",Fr
 
 <body>
 <div class="container">
-	<div class="title">提示信息：</div>
+	<div class="title">提示信息:</div>
 	<div class="content"><?php if(isset($message)){ echo $message; } ?></div>
 </div>
 </body>

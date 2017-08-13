@@ -66,7 +66,7 @@ class WidgetTemplate extends Template {
      *
      * @access public
      *
-     * @param string $layoutName 所要设置的layout名称。默认值为:null，即：不使用layout视图
+     * @param string $layoutName 所要设置的layout名称。默认值为:null，即:不使用layout视图
      *
      * @return boolean
      */
@@ -78,7 +78,7 @@ class WidgetTemplate extends Template {
     /**
      * 分析并加载视图缓存
      *
-     * 注：挂件(Widget)的视图机制不支持视图缓存
+     * 注:挂件(Widget)的视图机制不支持视图缓存
      *
      * @access public
      *
@@ -100,7 +100,7 @@ class WidgetTemplate extends Template {
      * @access public
      *
      * @param string $fileName 视图片段文件名称
-     * @param array $data 视图模板变量，注：数组型
+     * @param array $data 视图模板变量，注:数组型
      * @param boolean $return 视图内容是否为返回，当为true时为返回，为false时则为显示。 默认为:false
      *
      * @return string
@@ -149,7 +149,7 @@ class WidgetTemplate extends Template {
     /**
      * 显示当前页面的视图内容
      *
-     * 注：挂件(Widget)的视图机制不支持Layout视图
+     * 注:挂件(Widget)的视图机制不支持Layout视图
      *
      * @access public
      *

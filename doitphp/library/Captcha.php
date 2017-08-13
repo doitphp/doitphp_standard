@@ -235,7 +235,7 @@ class Captcha {
      *
      * @access public
      *
-     * @param string $param 颜色参数. 如：#FF0000
+     * @param string $param 颜色参数. 如:#FF0000
      *
      * @return object
      */
@@ -261,7 +261,7 @@ class Captcha {
      *
      * @access public
      *
-     * @param string $param    颜色参数. 如：#FF0000
+     * @param string $param    颜色参数. 如:#FF0000
      *
      * @return object
      */

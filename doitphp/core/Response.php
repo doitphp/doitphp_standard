@@ -53,7 +53,7 @@ abstract class Response {
      *
      * @access public
      *
-     * @param integer $seconds 生存周期（单位：秒）
+     * @param integer $seconds 生存周期（单位:秒）
      *
      * @return boolean
      */
@@ -96,8 +96,8 @@ abstract class Response {
      * 显示提示信息操作
      *
      * 本方法支持URL的自动跳转，当显示时间有效期失效时则跳转到自定义网址，若跳转网址为空则函数不执行跳转功能，当自定义网址参数为-1时默认为:返回上一页。
-     * 注：显示提示信息的页面模板内容可以自定义. 方法：在项目视图目录中的error子目录中新建message.php文件,自定义该文件内容。
-     * 模板文件输出信息处代码参考doitphp子目录中文件：views/errors/message.php
+     * 注:显示提示信息的页面模板内容可以自定义. 方法:在项目视图目录中的error子目录中新建message.php文件,自定义该文件内容。
+     * 模板文件输出信息处代码参考doitphp子目录中文件:views/errors/message.php
      *
      * @access public
      *

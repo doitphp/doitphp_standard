@@ -194,7 +194,7 @@ class Text {
         //br
         $text    =    preg_replace('/<br(\s\/)?'.'>/i','[br]',$text);
         $text    =    preg_replace('/(\[br\]\s*){10,}/i','[br]',$text);
-        //过滤危险的属性，如：过滤on事件lang js
+        //过滤危险的属性，如:过滤on事件lang js
         while(preg_match('/(<[^><]+)( lang|on|action|background|codebase|dynsrc|lowsrc)[^><]+/i',$text,$mat)){
             $text=str_replace($mat[0],$mat[1],$text);
         }

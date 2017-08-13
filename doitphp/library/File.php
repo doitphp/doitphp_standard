@@ -179,7 +179,7 @@ class File {
      * @access public
      *
      * @param string $dirPath 所要清空内容的文件夹名称
-     * @param boolean $option 是否删除子目录, 注：当为false时,只删除子目录中的文件,目录不会删除
+     * @param boolean $option 是否删除子目录, 注:当为false时,只删除子目录中的文件,目录不会删除
      *
      * @return boolean
      */

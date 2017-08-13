@@ -2,7 +2,7 @@
 /**
  * 将汉字转化为拼音类
  *
- * 注：支持的汉字编码为gbk,汉字也是常用的汉字,对于生僻的汉字可能无法支持
+ * 注:支持的汉字编码为gbk,汉字也是常用的汉字,对于生僻的汉字可能无法支持
  *
  * @author tommy <tommy@doitphp.com>
  * @copyright Copyright (c) 2010 Tommy Software Studio

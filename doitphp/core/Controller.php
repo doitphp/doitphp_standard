@@ -290,12 +290,12 @@ abstract class Controller {
     /**
      * 网址(URL)组装操作
      *
-     * 注：组装绝对路径的URL
+     * 注:组装绝对路径的URL
      *
      * @access public
      *
-     * @param string $route controller与action。例：controllerName/actionName
-     * @param array $params URL路由其它字段。注：url的参数信息
+     * @param string $route controller与action。例:controllerName/actionName
+     * @param array $params URL路由其它字段。注:url的参数信息
      *
      * @return string
      */
@@ -307,11 +307,11 @@ abstract class Controller {
     /**
      * 获取当前运行的Action的URL
      *
-     * 获取当前Action的URL. 注:该网址由当前的控制器(Controller)及动作(Action)组成。注：支持参数信息
+     * 获取当前Action的URL. 注:该网址由当前的控制器(Controller)及动作(Action)组成。注:支持参数信息
      *
      * @access public
      *
-     * @param array $params url路由其它字段。注：url的参数信息
+     * @param array $params url路由其它字段。注:url的参数信息
      *
      * @return string
      */
@@ -326,12 +326,12 @@ abstract class Controller {
     /**
      * 获取当前Controller内的某Action的url
      *
-     * 获取当前控制器(Controller)内的动作(Action)的url。 注：该网址仅由项目入口文件和控制器(Controller)组成，支持其它参数信息
+     * 获取当前控制器(Controller)内的动作(Action)的url。 注:该网址仅由项目入口文件和控制器(Controller)组成，支持其它参数信息
      *
      * @access public
      *
      * @param string $actionName 所要获取url的action的名称
-     * @param array $params url路由其它字段。注：url的参数信息
+     * @param array $params url路由其它字段。注:url的参数信息
      *
      * @return string
      */
@@ -452,7 +452,7 @@ abstract class Controller {
     /**
      * 加载并单例模式实例化扩展插件
      *
-     * 注：这里所调用的扩展插件存放在extension目录里的子目录中。如：当加参数为demo,则子目录为名demo
+     * 注:这里所调用的扩展插件存放在extension目录里的子目录中。如:当加参数为demo,则子目录为名demo
      * ext是extension简写
      *
      * @access public
@@ -477,18 +477,18 @@ abstract class Controller {
      * 相当于inclue_once()
      *
      * @example
-     * 例一：
+     * 例一:
      * $this->import('snoopy.php');
      *
-     * 例二：
+     * 例二:
      * $this->import(BASE_PATH . '/extensions/editer/fck.php');
      *
-     * 例三：在扩展目录(Extension)的Controller代码中加载application的library目录里的文件:snoopy.php
+     * 例三:在扩展目录(Extension)的Controller代码中加载application的library目录里的文件:snoopy.php
      * $this->import('snoopy.php', false);
      *
      * @access public
      *
-     * @param string $fileName 所要加载的文件。注：默认目录为application的子目录：library
+     * @param string $fileName 所要加载的文件。注:默认目录为application的子目录:library
      *
      * @return void
      */
@@ -521,7 +521,7 @@ abstract class Controller {
      *
      * @access public
      *
-     * @param string $configName 所要加载的配置文件名 注：不含后缀名
+     * @param string $configName 所要加载的配置文件名 注:不含后缀名
      *
      * @return array
      */
@@ -535,7 +535,7 @@ abstract class Controller {
      *
      * @access public
      *
-     * @param string $layoutName 所要设置的layout名称。默认值为:null，即：不使用layout视图
+     * @param string $layoutName 所要设置的layout名称。默认值为:null，即:不使用layout视图
      *
      * @return boolean
      */
@@ -624,7 +624,7 @@ abstract class Controller {
      * @access public
      *
      * @param string $fileName 视图片段文件名称
-     * @param array $data 视图模板变量，注：数组型
+     * @param array $data 视图模板变量，注:数组型
      * @param boolean $return 视图内容是否为返回，当为true时为返回，为false时则为显示。 默认为:false
      *
      * @return string
@@ -666,7 +666,7 @@ abstract class Controller {
     /**
      * 加载视图处理类并完成视图类的实例化
      *
-     * 注：本类方法为回调类方法。通过在Controller Class的继承子类中重载本类方法，来实现自定义DoitPHP项目的视图机制的操作。
+     * 注:本类方法为回调类方法。通过在Controller Class的继承子类中重载本类方法，来实现自定义DoitPHP项目的视图机制的操作。
      *
      * @access protected
      * @return object

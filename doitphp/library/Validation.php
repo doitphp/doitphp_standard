@@ -52,7 +52,7 @@ class Validation {
     /**
      * 使用正则表达式验证字符串中是否含有汉字
      *
-     * @param integer $string    所要验证的字符串。注：字符串编码仅支持UTF-8
+     * @param integer $string    所要验证的字符串。注:字符串编码仅支持UTF-8
      * @return boolean
      */
     public static function isChineseCharacter($string) {

@@ -135,7 +135,7 @@ class DbPdo {
     /**
      * 执行SQL语句
      *
-     * 注：用于执行查询性的SQL语句（需要数据返回的情况）。
+     * 注:用于执行查询性的SQL语句（需要数据返回的情况）。
      *
      * @access public
      *
@@ -173,12 +173,12 @@ class DbPdo {
     /**
      * 执行SQL语句
      *
-     * 注：本方法用于无需返回信息的操作。如：更改、删除、添加数据信息(即：用于执行非查询SQL语句)
+     * 注:本方法用于无需返回信息的操作。如:更改、删除、添加数据信息(即:用于执行非查询SQL语句)
      *
      * @access public
      *
      * @param string $sql 所要执行的SQL语句
-     * @param array $params 待转义的数据。注：本参数支持字符串及数组，如果待转义的数据量在两个或两个以上请使用数组
+     * @param array $params 待转义的数据。注:本参数支持字符串及数组，如果待转义的数据量在两个或两个以上请使用数组
      *
      * @return boolean
      */
@@ -227,7 +227,7 @@ class DbPdo {
      *
      * @access public
      *
-     * @param string $mode 返回数据的索引类型：字段型/数据型 等。默认：字段型
+     * @param string $mode 返回数据的索引类型:字段型/数据型 等。默认:字段型
      *
      * @return array
      */
@@ -256,7 +256,7 @@ class DbPdo {
      *
      * @access public
      *
-     * @param string $mode 返回数据的索引类型：字段型/数据型 等。默认：字段型
+     * @param string $mode 返回数据的索引类型:字段型/数据型 等。默认:字段型
      *
      * @return array
      */
@@ -327,10 +327,10 @@ class DbPdo {
      * @return string
      *
      * @example
-     * 例一：
+     * 例一:
      * $erronInfo = $this->getLastError();
      *
-     * 例二：
+     * 例二:
      * $sth = $this->_dbConnection->prepare('select * from tablename');
      * $sth->execute();
      *
@@ -620,7 +620,7 @@ class DbPdo {
      * @access public
      *
      * @param string $tableName 所要操作的数据表名称
-     * @param array $data 所要写入的数据内容。注：数据必须为数组
+     * @param array $data 所要写入的数据内容。注:数据必须为数组
      * @param boolean $isReturnId 是否返回数据为:last insert id
      *
      * @return mixed
@@ -660,7 +660,7 @@ class DbPdo {
      * @access public
      *
      * @param string $tableName 所要操作的数据表名称
-     * @param array $data 所要替换的数据内容。注：数据必须为数组
+     * @param array $data 所要替换的数据内容。注:数据必须为数组
      *
      * @return mixed
      */

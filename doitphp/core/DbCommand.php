@@ -74,7 +74,7 @@ class DbCommand {
      * @access public
      *
      * @param string $method 类方法名称
-     * @param array $args 参数值。注：本参数为数组
+     * @param array $args 参数值。注:本参数为数组
      *
      * @return mixed
      */
@@ -111,7 +111,7 @@ class DbCommand {
      *
      * @access public
      *
-     * @param mixed $tableName 所要查询的数据表名。注：本参数支持数组
+     * @param mixed $tableName 所要查询的数据表名。注:本参数支持数组
      * @param mixed $fields 所要查询的数据表字段。默认数据表全部字段
      *
      * @return object
@@ -394,7 +394,7 @@ class DbCommand {
      * @access public
      *
      * @param string $tableName 数据表名
-     * @param string $where join条件。注：不支持数组
+     * @param string $where join条件。注:不支持数组
      *
      * @return object
      */
@@ -478,7 +478,7 @@ class DbCommand {
     /**
      * 执行SQL语句
      *
-     * 注：用于执行查询性的SQL语句（需要数据返回的情况）。
+     * 注:用于执行查询性的SQL语句（需要数据返回的情况）。
      *
      * @access public
      * @return boolean
@@ -521,11 +521,11 @@ class DbCommand {
     /**
      * 获取查询信息中的一行数据
      *
-     * 注：本函数(类方法)需与query()组合使用。
+     * 注:本函数(类方法)需与query()组合使用。
      *
      * @access public
      *
-     * @param string $model 返回数据的索引类型：字段型/数据型 等。默认：字段型
+     * @param string $model 返回数据的索引类型:字段型/数据型 等。默认:字段型
      *
      * @return array
      */
@@ -537,11 +537,11 @@ class DbCommand {
     /**
      * 获取查询信息的全部数据
      *
-     * 注：本函数（类方法）需与query()组合使用。
+     * 注:本函数（类方法）需与query()组合使用。
      *
      * @access public
      *
-     * @param string $model 返回数据的索引类型：字段型/数据型 等。默认：字段型
+     * @param string $model 返回数据的索引类型:字段型/数据型 等。默认:字段型
      *
      * @return array
      */
@@ -613,7 +613,7 @@ class DbCommand {
      * @access protected
      *
      * @param string $methodName 调用的查询函数名
-     * @param mixed $tableName 所要查询的数据表名。注：本参数支持数组
+     * @param mixed $tableName 所要查询的数据表名。注:本参数支持数组
      * @param mixed $fields 所要查询的数据表字段。默认数据表全部字段
      *
      * @return object
@@ -645,7 +645,7 @@ class DbCommand {
      *
      * @access public
      *
-     * @param mixed $tableName 所要查询的数据表名。注：本参数支持数组
+     * @param mixed $tableName 所要查询的数据表名。注:本参数支持数组
      * @param mixed $fields 所要查询的数据表字段。默认数据表全部字段
      *
      * @return object
@@ -670,7 +670,7 @@ class DbCommand {
     /**
      * 析构方法
      *
-     * 当本类程序运行结束后，用于&quot;打扫战场&quot;，如：清空无效的内存占用等
+     * 当本类程序运行结束后，用于&quot;打扫战场&quot;，如:清空无效的内存占用等
      *
      * @access public
      * @return boolean

@@ -34,7 +34,7 @@ abstract class Router {
      */
     public static function getRequest() {
 
-        //当访问网址的格式时。如：http://yourdomain/index.php?router=member/list/index&id=23
+        //当访问网址的格式时。如:http://yourdomain/index.php?router=member/list/index&id=23
         if (URL_FORMAT == Configure::GET_FORMAT) {
 
             if (isset($_GET[self::$_routerVar]) && $_GET[self::$_routerVar] == true) {
@@ -54,7 +54,7 @@ abstract class Router {
             return array('controller'=>DEFAULT_CONTROLLER, 'action'=>DEFAULT_ACTION);
         }
 
-        //当网址格式为路由网址时。如：http://yourdomain/index.php/member/list/mid/23/page/7
+        //当网址格式为路由网址时。如:http://yourdomain/index.php/member/list/mid/23/page/7
         if (isset($_SERVER['SCRIPT_NAME']) && isset($_SERVER['REQUEST_URI'])) {
             //网址分析
             $uri = self::_parseUri();
@@ -165,7 +165,7 @@ abstract class Router {
     /**
      * 网址(URL)组装操作
      *
-     * 注：组装绝对路径的URL
+     * 注:组装绝对路径的URL
      *
      * @example
      * $memberUrl = Router::createUrl('member/list', array('mid'=>23, 'page'=>7));
@@ -174,8 +174,8 @@ abstract class Router {
      *
      * @access public
      *
-     * @param string $route controller与action。例：controllerName/actionName
-     * @param array $params URL路由其它字段。注：url的参数信息
+     * @param string $route controller与action。例:controllerName/actionName
+     * @param array $params URL路由其它字段。注:url的参数信息
      *
      * @return string
      */

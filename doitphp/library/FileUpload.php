@@ -14,7 +14,7 @@
 class FileUpload {
 
     /**
-     * 文件限制大小（默认：8M）
+     * 文件限制大小（默认:8M）
      *
      * @var integer
      */
@@ -79,11 +79,11 @@ class FileUpload {
     }
 
     /**
-     * 设置上传文件的限制格式，即：文件后缀。
+     * 设置上传文件的限制格式，即:文件后缀。
      *
      * @access public
      *
-     * @param array $type 所限制上传文件后缀。注：本参数为数组
+     * @param array $type 所限制上传文件后缀。注:本参数为数组
      *
      * @return object
      */

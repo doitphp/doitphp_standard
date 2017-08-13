@@ -50,14 +50,14 @@ abstract class Widget extends Controller {
     /**
      * 加载视图处理类并完成视图类的实例化
      *
-     * 注：本类方法为回调类方法。
+     * 注:本类方法为回调类方法。
      *
      * @access protected
      * @return object
      */
     protected function initView() {
 
-        //当视图文件格式为PHP时，采用Widget自身的视图机制。即：非View Class的视图机制
+        //当视图文件格式为PHP时，采用Widget自身的视图机制。即:非View Class的视图机制
         if (VIEW_EXT == Configure::VIEW_EXT_PHP) {
             return null;
         }
@@ -82,7 +82,7 @@ abstract class Widget extends Controller {
      *
      * @access public
      *
-     * @param string $layoutName 所要设置的layout名称。默认值为:null，即：不使用layout视图
+     * @param string $layoutName 所要设置的layout名称。默认值为:null，即:不使用layout视图
      *
      * @return boolean
      */
@@ -94,7 +94,7 @@ abstract class Widget extends Controller {
     /**
      * 分析并加载视图缓存
      *
-     * 注：挂件(Widget)的视图机制不支持视图缓存
+     * 注:挂件(Widget)的视图机制不支持视图缓存
      *
      * @access public
      *
@@ -111,7 +111,7 @@ abstract class Widget extends Controller {
     /**
      * 显示当前页面的视图内容
      *
-     * 注：挂件(Widget)的视图机制不支持Layout视图
+     * 注:挂件(Widget)的视图机制不支持Layout视图
      *
      * @access public
      *
@@ -185,7 +185,7 @@ abstract class Widget extends Controller {
      * @access public
      *
      * @param string $fileName 视图片段文件名称
-     * @param array $data 视图模板变量，注：数组型
+     * @param array $data 视图模板变量，注:数组型
      * @param boolean $return 视图内容是否为返回，当为true时为返回，为false时则为显示。 默认为:false
      *
      * @return string

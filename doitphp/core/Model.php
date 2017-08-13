@@ -142,7 +142,7 @@ class Model {
     /**
      * 获取当前模型（Model）文件所对应的数据表主键
      *
-     * 注：数据表的物理主键，真实存在的，不是虚拟的。
+     * 注:数据表的物理主键，真实存在的，不是虚拟的。
      *
      * @access protected
      * @return string
@@ -195,7 +195,7 @@ class Model {
     /**
      * 设置当前模型（Model）文件所对应的数据表的名称
      *
-     * 注：数据表名称不含数据表前缀（$prefix）
+     * 注:数据表名称不含数据表前缀（$prefix）
      *
      * @access public
      *
@@ -216,7 +216,7 @@ class Model {
     }
 
     /**
-     * 回调类方法：自定义数据表名
+     * 回调类方法:自定义数据表名
      *
      * 在继承类中重载本方法可以定义所对应的数据表的名称
      *
@@ -229,7 +229,7 @@ class Model {
     }
 
     /**
-     * 回调类方法：自定义数据表主键
+     * 回调类方法:自定义数据表主键
      *
      * 在继承类中重载本方法可以定义所对应的数据表的主键。
      *
@@ -242,7 +242,7 @@ class Model {
     }
 
     /**
-     * 回调类方法：自定义数据表字段信息
+     * 回调类方法:自定义数据表字段信息
      *
      * 在继承类中重载本方法可以定义所对应的数据表的字段信息。
      *
@@ -268,7 +268,7 @@ class Model {
     /**
      * 加载当前模型（Model）文件的缓存文件内容
      *
-     * 注：缓存文件内容为：当前模型（Model）文件所对应的数据表的字段信息及主键信息。
+     * 注:缓存文件内容为:当前模型（Model）文件所对应的数据表的字段信息及主键信息。
      *
      * @access protected
      *
@@ -304,7 +304,7 @@ class Model {
     /**
      * 创建当前模型（Model）文件的缓存文件
      *
-     * 注：缓存文件包含当前模型（Model）文件所对应的数据表的字段和主键信息，用于减轻数据反复查询数据表字段信息的操作，从而提高程序的运行效率。
+     * 注:缓存文件包含当前模型（Model）文件所对应的数据表的字段和主键信息，用于减轻数据反复查询数据表字段信息的操作，从而提高程序的运行效率。
      *
      * @access protected
      *
@@ -351,7 +351,7 @@ class Model {
     /**
      * 删除当前模型（Model）文件的缓存文件
      *
-     * 注：如果自定了数据表的字段信息及主键信息，则当前模型（Model）文件的缓存文件不再被使用。
+     * 注:如果自定了数据表的字段信息及主键信息，则当前模型（Model）文件的缓存文件不再被使用。
      *
      * @access public
      *
@@ -395,14 +395,14 @@ class Model {
     }
 
     /**
-     * 调试类方法：优雅输出print_r()函数所要输出的内容
+     * 调试类方法:优雅输出print_r()函数所要输出的内容
      *
-     * 注：详细信息参见Controller Class中的类方法dump()。
+     * 注:详细信息参见Controller Class中的类方法dump()。
      *
      * @access public
      *
      * @param mixed $data 所要输出的数据
-     * @param boolean $type 输出的信息是否含有数据类型信息。true：支持/false：不支持
+     * @param boolean $type 输出的信息是否含有数据类型信息。true:支持/false:不支持
      *
      * @return array
      */
@@ -435,11 +435,11 @@ class Model {
     /**
      * 静态获取配置文件的内容
      *
-     * 注：此配置文件非数据库连接配置文件，而是其它用途的配置文件。详细信息参见Controller Class中的类方法getConfig()。
+     * 注:此配置文件非数据库连接配置文件，而是其它用途的配置文件。详细信息参见Controller Class中的类方法getConfig()。
      *
      * @access public
      *
-     * @param string $fileName 配置文件的名称。注：不含有“.php”后缀
+     * @param string $fileName 配置文件的名称。注:不含有“.php”后缀
      *
      * @return array
      */
@@ -460,7 +460,7 @@ class Model {
      *
      * @access public
      *
-     * @param boolean $adapter 是否为主数据库。true：主数据库/false：从数据库
+     * @param boolean $adapter 是否为主数据库。true:主数据库/false:从数据库
      *
      * @return object
      */
@@ -485,7 +485,7 @@ class Model {
     }
 
     /**
-     * 事务处理：开启事务处理
+     * 事务处理:开启事务处理
      *
      * @access public
      * @return boolean
@@ -496,7 +496,7 @@ class Model {
     }
 
     /**
-     * 事务处理：提交事务处理
+     * 事务处理:提交事务处理
      *
      * @access public
      * @return boolean
@@ -507,7 +507,7 @@ class Model {
     }
 
     /**
-     * 事务处理：事务回滚
+     * 事务处理:事务回滚
      *
      * @access public
      * @return boolean
@@ -520,12 +520,12 @@ class Model {
     /**
      * 执行SQL语句
      *
-     * 注：本方法用于无需返回信息的操作。如：更改、删除、添加数据信息(即：用于执行非查询SQL语句)
+     * 注:本方法用于无需返回信息的操作。如:更改、删除、添加数据信息(即:用于执行非查询SQL语句)
      *
      * @access public
      *
      * @param string $sql 所要执行的SQL语句
-     * @param array $params 待转义的数据。注：本参数支持字符串及数组，如果待转义的数据量在两个或两个以上请使用数组
+     * @param array $params 待转义的数据。注:本参数支持字符串及数组，如果待转义的数据量在两个或两个以上请使用数组
      *
      * @return boolean
      */
@@ -550,12 +550,12 @@ class Model {
     /**
      * 执行SQL语句
      *
-     * 注：用于执行查询性的SQL语句（需要数据返回的情况）。
+     * 注:用于执行查询性的SQL语句（需要数据返回的情况）。
      *
      * @access public
      *
      * @param string $sql 所要执行的SQL语句
-     * @param array $params 待转义的数据。注：本参数支持字符串及数组，如果待转义的数据量在两个或两个以上请使用数组
+     * @param array $params 待转义的数据。注:本参数支持字符串及数组，如果待转义的数据量在两个或两个以上请使用数组
      *
      * @return boolean
      */
@@ -582,7 +582,7 @@ class Model {
      *
      * @access public
      *
-     * @param array $data 所要写入的数据内容。注：数据必须为数组
+     * @param array $data 所要写入的数据内容。注:数据必须为数组
      * @param boolean $isReturnId 是否返回数据为:last insert id
      *
      * @return mixed
@@ -614,7 +614,7 @@ class Model {
      *
      * @access public
      *
-     * @param array $data 所要替换的数据内容。注：数据必须为数组
+     * @param array $data 所要替换的数据内容。注:数据必须为数组
      *
      * @return boolean
      */
@@ -709,12 +709,12 @@ class Model {
     }
 
     /**
-     * 主键查询：获取一行主键查询的数据
+     * 主键查询:获取一行主键查询的数据
      *
-     * 注：默认主键为数据表的物理主键
+     * 注:默认主键为数据表的物理主键
      *
      * @access public
-     * @param mixed $id 所要查询的主键值。注：本参数可以为数组。当为数组时，返回多行数据
+     * @param mixed $id 所要查询的主键值。注:本参数可以为数组。当为数组时，返回多行数据
      * @return array
      */
     public function find($id) {
@@ -746,7 +746,7 @@ class Model {
     }
 
     /**
-     * 主键查询：获取数据表的全部数据信息
+     * 主键查询:获取数据表的全部数据信息
      *
      * 以主键为中心排序，获取数据表全部数据信息。注:如果数据表数据量较大时，慎用此函数（类方法），以免数据表数据量过大，造成数据库服务器内存溢出,甚至服务器宕机
      *
@@ -826,7 +826,7 @@ class Model {
      *
      * @param mixed $where 查询条件
      * @param mixed $value 待转义的数值
-     * @param mixed $fields 返回数据的数据表字段，默认为全部字段。注：本参数推荐使用数组
+     * @param mixed $fields 返回数据的数据表字段，默认为全部字段。注:本参数推荐使用数组
      * @param mixed $orderDesc 排序条件
      * @param integer $limitStart limit查询的启起ID
      * @param integer $listNum 数据显示的行数
@@ -876,7 +876,7 @@ class Model {
      *
      * @access public
      *
-     * @param mixed $value 所要转义的字符或字符串。注：参数支持数组
+     * @param mixed $value 所要转义的字符或字符串。注:参数支持数组
      *
      * @return mixed
      */
@@ -892,7 +892,7 @@ class Model {
      *
      * @access protected
      *
-     * @param array $data 待过滤的含字段信息的数据。注：本参数为数组
+     * @param array $data 待过滤的含字段信息的数据。注:本参数为数组
      *
      * @return array
      */
@@ -1043,7 +1043,7 @@ class Model {
      *
      * @access protected
      *
-     * @param integer $startId 启始id。注：参数为整形
+     * @param integer $startId 启始id。注:参数为整形
      * @param integer $listNum 显示的行数
      *
      * @return string
@@ -1301,7 +1301,7 @@ class Model {
 
         $this->_parts['where'] = (isset($this->_parts['where']) && $this->_parts['where']) ? $this->_parts['where'] . ' AND ' . $where : 'WHERE ' . $where;
 
-        //当$model->where('name=?', 'tommy');操作时,即：需要字符串转义
+        //当$model->where('name=?', 'tommy');操作时,即:需要字符串转义
         if (!is_null($value)) {
             if (!is_array($value)) {
                 $value = func_get_args();
@@ -1325,7 +1325,7 @@ class Model {
      *
      * @access public
      *
-     * @param mixed $orderDesc 排序条件。注：本参数支持数组
+     * @param mixed $orderDesc 排序条件。注:本参数支持数组
      *
      * @return mixed
      */
@@ -1379,7 +1379,7 @@ class Model {
      *
      * @access public
      *
-     * @param integer $limitStart 启始id。注：参数为整形
+     * @param integer $limitStart 启始id。注:参数为整形
      * @param integer $listNum 显示的行数
      *
      * @return object
@@ -1661,7 +1661,7 @@ class Model {
     }
 
     /**
-     * 回调类方法：自定义当前模型（Model）的数据库连接参数
+     * 回调类方法:自定义当前模型（Model）的数据库连接参数
      *
      * @access protected
      * @return array
@@ -1672,7 +1672,7 @@ class Model {
     }
 
     /**
-     * 回调类方法：前函数(类方法)
+     * 回调类方法:前函数(类方法)
      *
      * 用于自定义实例化当前模型时所执行的程序
      *
@@ -1687,7 +1687,7 @@ class Model {
     /**
      * 析构方法（函数）
      *
-     * 当本类程序运行结束后，用于&quot;打扫战场&quot;，如：清空无效的内存占用等
+     * 当本类程序运行结束后，用于&quot;打扫战场&quot;，如:清空无效的内存占用等
      *
      * @access public
      * @return boolean

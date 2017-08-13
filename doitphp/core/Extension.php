@@ -31,7 +31,7 @@ abstract class Extension extends Controller {
      *
      * @access public
      *
-     * @param string $layoutName 所要设置的layout名称。默认值为:null，即：不使用layout视图
+     * @param string $layoutName 所要设置的layout名称。默认值为:null，即:不使用layout视图
      *
      * @return boolean
      */
@@ -43,7 +43,7 @@ abstract class Extension extends Controller {
     /**
      * 分析并加载视图缓存
      *
-     * 注：挂件(Widget)的视图机制不支持视图缓存
+     * 注:挂件(Widget)的视图机制不支持视图缓存
      *
      * @access public
      *
@@ -60,7 +60,7 @@ abstract class Extension extends Controller {
     /**
      * 加载视图处理类并完成视图类的实例化
      *
-     * 注：本类方法为回调类方法。
+     * 注:本类方法为回调类方法。
      *
      * @access protected
      * @return object
@@ -73,7 +73,7 @@ abstract class Extension extends Controller {
     /**
      * 显示当前页面的视图内容
      *
-     * 注：挂件(Widget)的视图机制不支持Layout视图
+     * 注:挂件(Widget)的视图机制不支持Layout视图
      *
      * @access public
      *
@@ -109,7 +109,7 @@ abstract class Extension extends Controller {
      * @access public
      *
      * @param string $fileName 视图片段文件名称
-     * @param array $data 视图模板变量，注：数组型
+     * @param array $data 视图模板变量，注:数组型
      * @param boolean $return 视图内容是否为返回，当为true时为返回，为false时则为显示。 默认为:false
      *
      * @return string
@@ -158,7 +158,7 @@ abstract class Extension extends Controller {
     /**
      * 加载并单例模式实例化扩展模块（通常为第三方程序）
      *
-     *  注：这里所调用的扩展模声要放在项目extension目录里的子目录中
+     *  注:这里所调用的扩展模声要放在项目extension目录里的子目录中
      *
      * @access public
      *

@@ -260,13 +260,13 @@ class Template {
     /**
      * 加载并显示视图片段文件内容
      *
-     * 相当于include 代码片段，当$return为:true时返回代码代码片段内容,反之则显示代码片段内容。注：本方法不支持layout视图
+     * 相当于include 代码片段，当$return为:true时返回代码代码片段内容,反之则显示代码片段内容。注:本方法不支持layout视图
      *
      * @access public
      *
      * @param string $fileName 视图片段文件名称
-     * @param array $data 视图模板变量，注：数组型
-     * @param boolean $return 是否有返回数据。true:返回数据/false:没有返回数据，默认：false
+     * @param array $data 视图模板变量，注:数组型
+     * @param boolean $return 是否有返回数据。true:返回数据/false:没有返回数据，默认:false
      *
      * @return string
      */
@@ -605,7 +605,7 @@ class Template {
      *
      * @access protected
      *
-     * @param string $fileName    视图名. 注：不带后缀
+     * @param string $fileName    视图名. 注:不带后缀
      *
      * @return string    视图文件路径
      */
@@ -729,12 +729,12 @@ class Template {
     /**
      * 网址(URL)组装操作
      *
-     * 注：组装绝对路径的URL
+     * 注:组装绝对路径的URL
      *
      * @access public
      *
-     * @param string $route controller与action。例：controllerName/actionName
-     * @param array $params URL路由其它字段。注：url的参数信息
+     * @param string $route controller与action。例:controllerName/actionName
+     * @param array $params URL路由其它字段。注:url的参数信息
      *
      * @return string
      */
@@ -751,11 +751,11 @@ class Template {
     /**
      * 获取当前运行的Action的URL
      *
-     * 获取当前Action的URL. 注:该网址由当前的控制器(Controller)及动作(Action)组成。注：支持参数信息
+     * 获取当前Action的URL. 注:该网址由当前的控制器(Controller)及动作(Action)组成。注:支持参数信息
      *
      * @access public
      *
-     * @param array $params url路由其它字段。注：url的参数信息
+     * @param array $params url路由其它字段。注:url的参数信息
      *
      * @return string
      */
@@ -767,12 +767,12 @@ class Template {
     /**
      * 获取当前Controller内的某Action的url
      *
-     * 获取当前控制器(Controller)内的动作(Action)的url。 注：该网址仅由项目入口文件和控制器(Controller)组成，支持其它参数信息
+     * 获取当前控制器(Controller)内的动作(Action)的url。 注:该网址仅由项目入口文件和控制器(Controller)组成，支持其它参数信息
      *
      * @access public
      *
      * @param string $actionName 所要获取url的action的名称
-     * @param array $params url路由其它字段。注：url的参数信息
+     * @param array $params url路由其它字段。注:url的参数信息
      *
      * @return string
      */
@@ -803,7 +803,7 @@ class Template {
     /**
      * 析构方法（函数）
      *
-     * 当本类程序运行结束后，用于打扫战场，如：清空无效的内存占用等
+     * 当本类程序运行结束后，用于打扫战场，如:清空无效的内存占用等
      *
      * @access public
      * @return boolean
